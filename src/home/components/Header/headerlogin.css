@@ -2,8 +2,9 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+  margin-right: 50px;
   .button-login {
-    background-color: rgb(13, 11, 11);
+    background-color: #00000094;
     border: none;
     background-color: none;
     cursor: pointer;
@@ -15,6 +16,21 @@
   }
 }
 
+.perfil-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & button {
+    margin-right: 20px;
+  }
+}
+
+.clone-user {
+  background-color: var(--color-golden);
+  padding: 5px 20px;
+  border-radius: 10px;
+}
+
 .nav-conf {
   width: 250px;
   height: 200px;
@@ -23,9 +39,9 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-
-  top: 70px;
-  background-color: rgba(13, 11, 11, 0.764);
+  border-radius: 20px;
+  top: 110px;
+  background-color: #00000094;
   & a {
     font-size: 20px;
     color: white;

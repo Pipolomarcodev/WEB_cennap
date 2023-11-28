@@ -1,13 +1,13 @@
 import React from "react";
 
-export const ModalInfo = () => {
+export const ModalInfo = ({ restaurant }) => {
   return (
     <>
       <div className="flex-content">
         <div className="flex-data">
           <img src="/src/components/modal/img/socialShare.svg" alt="" />
           <img src="/src/components/modal/img/heart.svg" alt="" />
-          <img src="/src/components/modal/img/logo.png" alt="logo" />
+          <img src="/src/home/components/modal/img/logo.png" alt="logo" />
           <div class="rating">
             <input value="5" name="rate" id="star5" type="radio" />
             <label title="text" for="star5" />
@@ -24,7 +24,7 @@ export const ModalInfo = () => {
         <p>Uruguay | Barrio Viejo, Montevideo</p>
       </div>
       <div className="flex-data">
-        <h3>El Tio Bistro |</h3>
+        <h3>{restaurant.name} |</h3>
         <img src="/src/components/modal/img/meat 1.png" alt="" />
         <img src="/src/components/modal/img/spaghetti 1.png" alt="" />
         <h4>Carnes , pastas</h4>

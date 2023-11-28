@@ -4,21 +4,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100;
 }
 
 .flex-restaurant{
   display: flex;
-  align-items: center;
+  align-items: left;
   justify-content: center;
   flex-direction: column;
-
+  margin-right: 25px;
 }
 
   .grid-card {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    gap: 50px;
   
 }
 
@@ -33,7 +33,14 @@
   border-color: black !important;
 }
 
-
+.mostSearched{
+  font-family: Roboto;
+  font-weight: 500;
+  color: rgba(173, 154, 154, 1);
+  font-size: 30px;
+  align-self: left;
+  
+}
 
 
 
@@ -58,4 +65,3 @@
     height: 25vw;
   }
 }
-

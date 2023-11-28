@@ -1,0 +1,112 @@
+.header {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 200px;
+  flex-wrap: wrap;
+
+}
+
+.header-background {
+  background-image: url("/src/assets/images/searcher-background-hq.png");
+
+  background-repeat: no-repeat;
+  background-color: black;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 190px;
+}
+
+.search-select{
+  width: 125px !important;
+  height: 46.5px !important;
+  background-color: #000000 !important;
+  color: white !important;
+  border-radius: 10px !important;
+  font-style: Ubuntu;
+  font-weight: 400;
+  font-size: 0.9em !important;
+  padding-left: 30px;
+  margin-left: 5px;
+}
+
+.search-select:hover{
+  cursor: pointer;
+}
+
+
+.search-main{
+  border-radius: 5px;
+  background-color: white !important;
+  height: 50px;
+  display: flex;
+
+  
+}
+
+.margin{
+  position: relative;
+display: flex;
+margin-top: 1.8px
+}
+
+.search-logo{
+  position: relative;
+  margin-left: -5px;
+
+}
+
+.search-logo a{
+  background-color: black !important;
+  height: 100% !important;
+  outline: solid black 2px !important;
+  border: solid black 0.1px !important;
+}
+
+.search-text{
+  border: none !important;
+  outline: none !important;
+  background-color: white !important;
+}
+
+
+
+.location-logo{
+  position: absolute;
+  width: 32px;
+  top: 10px;
+  left: 6px;
+}
+
+.date-logo{
+  position: absolute;
+  width: 22px;
+  top: 12px;
+  left: 11px;
+}
+
+.cupcake-logo{
+  position: absolute;
+  width: 21px;
+  top: 12px;
+  left: 11px;
+}
+
+.control{
+
+  display: flex;
+}
+
+.search-text{
+  width: 270px !important;
+}
+
+
+.search-selects{
+  margin-right: 5px !important;
+}

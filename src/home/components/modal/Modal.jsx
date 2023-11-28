@@ -6,20 +6,17 @@ import ModalComment from "./ModalComment";
 import { ModalText } from "./ModalText";
 import { ModalCalendar } from "./ModalCalendar";
 
-
-
-export const Modal = () => {
-
+export const Modal = ({ closeModal, restaurant }) => {
   return (
-
     <div className="modal-background modal-center ">
+      <button onClick={closeModal}>x</button>
       <div className="container-grid">
         <div className="grid-img">
           <ModalGalery />
         </div>
         <div className="grid-date">
           <div className="flex-content">
-            <ModalInfo />
+            <ModalInfo restaurant={restaurant} />
           </div>
           <div className="flex-comment">
             <ModalComment />

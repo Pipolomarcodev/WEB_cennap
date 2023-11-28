@@ -496,15 +496,44 @@ textarea {
 .modal-content {
   background: #fff;
   padding: 20px;
-  max-width: 400px;
-  width: 100%;
+  width: 60vw;
+  height: 70vh;
   border-radius: 8px;
   position: relative;
 }
 
 .close-button {
   position: absolute;
-  top: 10px;
+  top: 5px;
   right: 10px;
   cursor: pointer;
+}
+
+.textsContainer{
+  margin-top: 8px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  height: 90%;
+}
+
+.textsContainer div textarea {
+  background-color: rgb(225, 225, 225);
+  height: 95%;
+  border: 0.1px solid rgba(0, 0, 0, 0.044);
+}
+
+
+
+.textsContainer div{
+
+}
+
+.politic{
+  font-size:x-large;
+}
+
+.politics-title{
+  background-color:  rgb(245, 245, 245);
+  border: 0.1px solid rgba(0, 0, 0, 0.044);
 }

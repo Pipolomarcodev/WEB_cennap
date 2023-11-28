@@ -1,8 +1,9 @@
 import { useRef } from "react";
 import "./profile.css";
-
+import { useNavigate } from "react-router-dom";
 export const Profile = () => {
   const fileInputRef = useRef();
+  const navigate = useNavigate();
 
   return (
     <div className="container-flex background">
@@ -40,7 +41,12 @@ export const Profile = () => {
           <input type="text" placeholder="Ciudad" />
         </div>
         <div className="form-submited">
-          <button className="btn-cancel">Cancelar</button>
+          <button
+            onClick={() => navigate("/home/:page")}
+            className="btn-cancel"
+          >
+            Cancelar
+          </button>
           <button className="btn-confirm">Confirmar</button>
         </div>
         <button className="btn-delete">
