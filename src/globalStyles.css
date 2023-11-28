@@ -1,0 +1,16 @@
+
+
+:root {
+  --background-glass: background-color: rgba(190, 185, 185, 0.4);
+
+  --color-golden: #cbb26a;
+  --color-golden-clear: #d8c690;
+  --color-golden-secundary: #be9e44;
+  --color-black: #000000;
+  --color-black-secundary: #1a1a1a;
+  --color-white: #ffff;
+  --color-one: #be9e44;
+
+  --background-image: url('./assets//images/background-auth.png');
+}
+

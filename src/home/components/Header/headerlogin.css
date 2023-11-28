@@ -1,0 +1,40 @@
+.nav-login {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  .button-login {
+    background-color: rgb(13, 11, 11);
+    border: none;
+    background-color: none;
+    cursor: pointer;
+  }
+
+  & h3 {
+    font-size: 20px;
+    color: #fff;
+  }
+}
+
+.nav-conf {
+  width: 250px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+
+  top: 70px;
+  background-color: rgba(13, 11, 11, 0.764);
+  & a {
+    font-size: 20px;
+    color: white;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .nav-login {
+    display: none;
+  }
+}

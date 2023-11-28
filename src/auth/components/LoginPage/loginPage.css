@@ -1,0 +1,105 @@
+.login-container {
+  width: auto;
+  height: 870px;
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+  background-image: url("/src/assets/images/background-auth.png");
+  background-repeat: no-repeat;
+  background-color: black;
+  background-size: cover;
+  background-position: center;
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(190, 185, 185, 0.4);
+    width: 421px;
+    height: 450px;
+    margin: 0 auto;
+    border-radius: 25px;
+    box-shadow: 0 7px 10px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    .form-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      & img,
+      strong {
+        margin: 10px;
+      }
+      & strong {
+        font-size: 16px;
+        color: rgba(173, 136, 71, 1);
+      }
+    }
+
+    .form-login {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+      & input {
+        width: 307px;
+        height: 44px;
+        border-radius: 25px;
+        border: none;
+        margin-top: 20px;
+        padding: 20px;
+        box-shadow: 0 7px 10px rgba(0, 0, 0, 0.1);
+        font-weight: 600;
+      }
+      .btn-form {
+        border: none;
+        margin-top: 20px;
+        width: 307px;
+        height: 44px;
+        border-radius: 25px;
+        font-weight: 500;
+        font-size: 16px;
+        cursor: pointer;
+        color: #fff;
+        background: linear-gradient(
+          90deg,
+          #926228 2.73%,
+          #ad8847 39.78%,
+          #c5a862 67.79%,
+          #f5ec9a 107.96%
+        );
+      }
+    }
+    .login {
+      display: flex;
+      font-size: 10px;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: -5px;
+      & a {
+        color: #454444;
+        text-decoration: underline;
+      }
+    }
+    .link-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+      & a {
+        margin-bottom: 20px;
+        color: var(--color-black-alternative);
+        margin-top: 5px;
+      }
+      & a:hover {
+        font-size: 15px;
+        text-decoration: underline;
+      }
+      & small {
+        color: rgba(0, 0, 0, 0.435);
+        text-align: center;
+        font-size: 10px;
+      }
+    }
+  }
+}

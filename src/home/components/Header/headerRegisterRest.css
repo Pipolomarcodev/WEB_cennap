@@ -1,0 +1,15 @@
+.link-rest {
+  background-color: var(--color-golden);
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 70px;
+  & a {
+    color: var(--color-black-altentive);
+    margin-left: 20px;
+    font-weight: bold;
+  }
+  & a:hover {
+    color: var(--color-white);
+  }
+}

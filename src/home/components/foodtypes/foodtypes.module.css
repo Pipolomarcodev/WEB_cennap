@@ -1,0 +1,24 @@
+
+.sectionFoodTypes{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.foodTypesContainer{
+    width: 1146px;
+    height: 156px;
+}
+
+.foodTypesGrid{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 60px; 
+    justify-content: center; 
+    align-items: center;
+}

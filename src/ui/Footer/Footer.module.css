@@ -1,0 +1,55 @@
+.footer {
+  display: flex;
+  background: #000000;
+  text-align: center;
+  width: 100vw;
+  height: 70px;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 0%;
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+  background: rgb(0, 0, 0);
+}
+
+.footer p {
+  font-size: 9px;
+  align-items: center;
+  color: #b6b6b6;
+}
+
+.footerMark {
+  align-items: left;
+  margin-left: 45px;
+  width: 25vw;
+}
+
+.socialIcons {
+  width: 20vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .socialIcon {
+    width: 20px;
+    height: 20px;
+    margin: 0 10px;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+}
+
+.containerisologo {
+  width: 10vw;
+  height: 64px;
+  margin-left: 90px;
+  align-items: center;
+  transform: scale(0.8);
+  justify-content: center;
+}
+
+.isologo {
+  height: 70px;
+  transform: scale(0.4);
+}
