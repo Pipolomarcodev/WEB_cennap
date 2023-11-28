@@ -1,43 +1,64 @@
 import "./main.css";
-import "./home.css"
+import "./home.css";
 import "../../../assets/bulma.css";
 import imagesCards from "../../../constants/images-cards";
-import { images } from "../../../constants";
 
-const Card = ({rating,name,category,location,image_url,reviews,liked}) => {
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Modal } from "../modal/Modal";
 
+const Card = ({
+  rating,
+  name,
+  category,
+  location,
+  image_url,
+  reviews,
+  liked,
+  handleAddToCart,
+  openModal,
+}) => {
   const getStarImage = (rating) => {
     const starImages = {
       1: imagesCards.oneStar,
       2: imagesCards.twoStar,
       3: imagesCards.threeStar,
-      4: imagesCards.fourStar,
-      5: imagesCards.fiveStar
+      4.5: imagesCards.fourStar,
+      5: imagesCards.fiveStar,
     };
-  
-    return starImages[rating] || defaultImage; // Puedes definir defaultImage según tus necesidades
+
+    return starImages[rating] || "defaultImage";
   };
+
   return (
     <>
       <div className="card-m">
-        <img src={image_url} alt="" /> 
+        <img src={image_url} alt="" />
 
         <div className="card__info">
-          <a href="#" className="titles">
+          <Link className="titles">
             {name}
 
-          <a href="#" className="category">
-            {category} 
-          </a>
-          </a>
+            <Link href="#" className="category">
+              {category}
+            </Link>
+          </Link>
 
-          <span className="pages ">
-           {location} 
-          </span>
+          <span className="pages ">{location}</span>
           <div>
-            <img src={getStarImage(rating)} alt={`Rating: ${rating} stars`}className="star" />
+            <img
+              src={getStarImage(rating)}
+              alt={`Rating: ${rating} stars`}
+              className="star"
+            />
             <span className="reviews">{`(${reviews} reviews)`}</span>
-            <img src={liked ? imagesCards.likeOn : imagesCards.likeOff} alt=""  className="like-button"/>
+            <img
+              src={liked ? imagesCards.likeOn : imagesCards.likeOff}
+              alt=""
+              className="like-button"
+            />
+            <button onClick={() => handleAddToCart()}>agregar</button>
+            <button onClick={() => openModal()}>Abrir</button>
           </div>
         </div>
       </div>

@@ -3,13 +3,14 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  position: fixed;
 }
 
 .container-grid {
   background: #fff;
-  height: auto;
-  width: 1200px;
+  height: 1000px;
   border-radius: 10px;
+  width: 900px;
 }
 
 .grid-img {

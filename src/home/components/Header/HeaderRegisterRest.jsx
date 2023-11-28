@@ -4,8 +4,7 @@ import "../Header/headerRegisterRest.css";
 export const HeaderRegisterRest = () => {
   return (
     <div className="link-rest">
-      <Link to={"/admin/form"}>Registra Tu Restaurant </Link>
-      <a href="">Ayuda ?</a>
+      <Link to={"/admin/form"}>Registra tu Restaurante </Link>
     </div>
   );
 };

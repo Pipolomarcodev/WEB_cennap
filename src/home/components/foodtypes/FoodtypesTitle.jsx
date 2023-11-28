@@ -1,13 +1,11 @@
-
+import styles from "./foodtypes.module.css"
 
 const FoodTypesTitle = () => {
    
     return (
 
         <>
-        <h1 >
-            Sugeridas para ti
-        </h1>
+      
         </>
   
     );

@@ -16,11 +16,16 @@ const BusinessRegister = () => {
   const navigate = useNavigate();
   const [modalVisible, setModalVisible] = useState(false);
 
+
+
   const openModal = () => {
+    console.log(formikRest.errors.weekSchedule);
+    console.log(weekSchedule);
     setModalVisible(true);
   };
 
   const closeModal = () => {
+
     setModalVisible(false);
   };
 
@@ -39,20 +44,25 @@ const BusinessRegister = () => {
   }, []);
 
   const showSectionA = () => {
-
-
     setIsSectionAVisible(true);
     setIsSectionBVisible(false);
     setIsBodyStyled(false);
   };
 
-  const showSectionB = () => {};
+  const showSectionB = () => {
+
+
+
+  };
 
   const goBack = () => {
     setIsSectionAVisible(true);
     setIsSectionBVisible(false);
     setIsBodyStyled(false);
   };
+
+  const terms =
+    "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis esse reprehenderit modi quos reiciendis dolorem culpa, excepturi facere eos sed! Quia, commodi. Quae accusantium quas iure dolor iste veniam dignissimos. -Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis esse reprehenderit modi quos reiciendis dolorem culpa, excepturi facere eos sed! Quia, commodi. Quae accusantium quas iure dolor iste veniam dignissimos. -Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis esse reprehenderit modi quos reiciendis dolorem culpa, excepturi facere eos sed! Quia, commodi. Quae accusantium quas iure dolor iste veniam dignissimos. -Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis esse reprehenderit modi quos reiciendis dolorem culpa, excepturi facere eos sed! Quia, commodi. Quae accusantium quas iure dolor iste veniam dignissimos. -Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis esse reprehenderit modi quos reiciendis dolorem culpa, excepturi facere eos sed! Quia, commodi. Quae accusantium quas iure dolor iste veniam dignissimos.";
 
   const food_styles = [
     "China",
@@ -89,6 +99,24 @@ const BusinessRegister = () => {
     "12:00 pm",
   ];
 
+
+  const validateSchedule = (weekSchedule) => {
+    const hasEnabledDay = Object.values(weekSchedule).some((day) => day.habilitado);
+  
+    if (!hasEnabledDay) {
+      return "Seleccione al menos un día habilitado";
+    }
+  
+    const invalidDays = Object.entries(weekSchedule).filter(
+      ([day, data]) => data.habilitado && (data.desde === "Desde" || data.hasta === "Hasta")
+    );
+  
+    return invalidDays.length > 0
+      ? "Seleccione el horario para todos los días habilitados"
+      : null;
+  };
+  
+
   const isEmailAvailable = async (email) => {
     // Simulación de la función fetch
     const response = await fetch(`URL_DE_TU_API/email-disponible/${email}`);
@@ -115,21 +143,179 @@ const BusinessRegister = () => {
       .required("Por favor seleccione un pais.")
       .notOneOf(["Pais*"], "Este campo es obligatorio."),
     fileSelect: yup.mixed().required("Por favor seleccione un logo."),
+    password: yup.string()
+    .min(6, 'La contraseña debe tener al menos 6 caracteres')
+    .required('La contraseña es requerida'),
+  confirmPassword: yup.string()
+    .oneOf([yup.ref('password'), null], 'Las contraseñas deben coincidir')
+    .required('La confirmación de la contraseña es requerida'),
   });
 
-  const onSubmit = () => {
-
-    //fetch para verificar que no existe un mail registrado GET 
+  const onSubmit = async () => {
     setIsSectionAVisible(false);
     setIsSectionBVisible(true);
     setIsBodyStyled(true);
   };
 
-  const onSubmitRest = () => {
-    //fetch POST DE RESTO Y ADMIN
+  const onSubmitRest = async (values, actions) => {
+    // Realiza la validación del horario
+    const scheduleError = validateSchedule(weekSchedule);
+  
+    // Si el horario no es válido, detén la ejecución
+    if (scheduleError) {
+      console.log(weekSchedule);
+      console.log("Invalido");
+      actions.setSubmitting(false); // Esto es importante para desbloquear el formulario
+      // Puedes manejar la lógica adicional, por ejemplo, setScheduleError(scheduleError);
+      return;
+    }
+  
+    const postData = {
+      "name": formik.values.nombreTitular,
+      "lastname": formik.values.nombreTitular,
+      "email": formik.values.correElectronico,
+      "password": "123admin",
+      "roles": "ROLE_ADMIN"
+    };
 
-    irAdmin()
+    const adminData = {
+      "username": formik.values.nombreTitular,
+      "password": "123admin"
+    }
+
+    const restData = {
+      "name": formikRest.values.restName,
+      "description": formikRest.values.description,
+      "short_description": formikRest.values.description,
+      "address": formikRest.values.address,
+      "phone": "+549323321234",
+      "zone_street": formikRest.values.zone,
+      "rating": 4.5,
+      "dayDisponibility": [
+        {
+          "dayOfWeek": "MONDAY",
+          "open": weekSchedule.lunes.habilitado,
+          "openHour": weekSchedule.lunes.desde,
+          "closeHour": weekSchedule.lunes.hasta
+        },
+        {
+          "dayOfWeek": "TUESDAY",
+          "open": weekSchedule.martes.habilitado,
+          "openHour": weekSchedule.martes.desde,
+          "closeHour": weekSchedule.martes.hasta
+        },
+        {
+          "dayOfWeek": "WEDNESDAY",
+          "open": weekSchedule.miércoles.habilitado,
+          "openHour": weekSchedule.miércoles.desde,
+          "closeHour": weekSchedule.miércoles.hasta
+        },
+        {
+          "dayOfWeek": "THURSDAY",
+          "open": weekSchedule.jueves.habilitado,
+          "openHour": weekSchedule.jueves.desde,
+          "closeHour":weekSchedule.jueves.hasta
+        },
+        {
+          "dayOfWeek": "FRIDAY",
+          "open": weekSchedule.viernes.habilitado,
+          "openHour": weekSchedule.viernes.desde,
+          "closeHour": weekSchedule.viernes.hasta
+        },
+        {
+          "dayOfWeek": "SATURDAY",
+          "open": weekSchedule.sábado.habilitado,
+          "openHour": weekSchedule.sábado.desde,
+          "closeHour": weekSchedule.sábado.hasta
+        },
+        {
+          "dayOfWeek": "SUNDAY",
+          "open": weekSchedule.domingo.habilitado,
+          "openHour": weekSchedule.domingo.desde,
+          "closeHour": weekSchedule.domingo.hasta
+        }
+      ],
+      "parking": true,
+      "live_music": true,
+      "events": true,
+      "terrace": false,
+      "active": true,
+      "area": "10 m2",
+      "average_score": 4.5,
+      "latitude": "prueba1",
+      "longitude": "Prueba2",
+      "cancellation_policy": "soy una prueba de políticas de cancelación",
+      "hse_policy": "hse_policies prueba",
+      "site_policy": "site_policies prueba",
+      "email": formik.values.correElectronico,
+      "category": {
+        "category": 1,
+        "name": "Comida de Mar",
+        "description": "soy una categoria",
+        "short_description": "aksjdaksljd",
+        "food_type": "Mesa 1",
+        "image": null
+      },
+      "city_id": 1,
+      "image": "imagenescrucks"
+    };
+    
+    try {
+      // Step 1: Create admin
+      const adminResponse = await fetch("http://localhost:8080/auth/addNewUser", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+      });
+  
+      if (!adminResponse.ok) {
+        throw new Error("Network response was not ok on admin");
+      }
+      
+      // Step 2: Generate token
+      const tokenResponse = await fetch("http://localhost:8080/auth/generateToken", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(adminData),
+      });
+  
+      if (!tokenResponse.ok) {
+        throw new Error(`Network response was not ok on token: ${tokenResponse.statusText}`);
+      }
+  
+      const tokenDataResponse = await tokenResponse.text();
+  
+      console.log('Token Response:', tokenDataResponse);
+  
+      // Step 3: Create restaurant
+      const restaurantResponse = await fetch("http://localhost:8080/v1/api/restaurants/create", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${tokenDataResponse}`,
+        },
+        body: JSON.stringify(restData),
+      });
+  
+      if (!restaurantResponse.ok) {
+        throw new Error(`Network response was not ok on create rest: ${restaurantResponse.statusText}`);
+      }
+  
+      console.log('Success restaurant:', await restaurantResponse.json());
+      irAdmin();
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
+
+
+
+
+  
 
   const formik = useFormik({
     initialValues: {
@@ -139,6 +325,8 @@ const BusinessRegister = () => {
       colaborador: "",
       pais: "",
       fileSelect: null,
+      password: "",
+      confirmPassword:""
     },
     validationSchema: adminSchema,
     onSubmit: onSubmit,
@@ -185,6 +373,31 @@ const BusinessRegister = () => {
       hasta: "n/a",
     },
   });
+  
+    const tableSchema = yup.object().shape({
+      quantity: yup
+        .string()
+        .required("Campo obligatorio")
+        .test(
+          "valid-quantity",
+          "La cantidad debe ser un número mayor que cero y no empezar con 0",
+          (value) => {
+            const parsedValue = parseInt(value, 10);
+            if (isNaN(parsedValue)) {
+              return false;
+            }
+            return parsedValue > 0 && !/^0/.test(value);
+          }
+        ),
+      type: yup
+        .string()
+        .required("Campo obligatorio")
+        .test(
+          "not-default",
+          "Seleccione un tipo de mesa",
+          (value) => value !== "Tipo de mesa"
+        ),
+    });
 
   const [tables, setTables] = useState([
     {
@@ -193,31 +406,17 @@ const BusinessRegister = () => {
     },
   ]);
 
-  const tableSchema = yup.object().shape({
-    quantity: yup
-      .string()
-      .required("Campo obligatorio")
-      .test(
-        "valid-quantity",
-        "La cantidad debe ser un número mayor que cero y no empezar con 0",
-        (value) => {
-          const parsedValue = parseInt(value, 10);
-          if (isNaN(parsedValue)) {
-            return false;
-          }
-          return parsedValue > 0 && !/^0/.test(value);
-        }
-      ),
-    type: yup
-      .string()
-      .required("Campo obligatorio")
-      .test(
-        "not-default",
-        "Seleccione un tipo de mesa",
-        (value) => value !== "Tipo de mesa"
-      ),
+  const daySchema = yup.object().shape({
+    habilitado: yup.boolean(),
+    desde: yup.string().when('habilitado', {
+      is: true,
+      then: yup.string().required('Por favor seleccione una hora de inicio para el día habilitado'),
+    }),
+    hasta: yup.string().when('habilitado', {
+      is: true,
+      then: yup.string().required('Por favor seleccione una hora de finalización para el día habilitado'),
+    }),
   });
-
   const restSchema = yup.object().shape({
     restName: yup
       .string("Ingrese un nombre válido")
@@ -253,6 +452,8 @@ const BusinessRegister = () => {
       .oneOf([true], "Debes aceptar los términos y condiciones para continuar")
       .required("Debes aceptar los términos y condiciones para continuar"),
   });
+
+  
 
   const formikRest = useFormik({
     initialValues: {
@@ -501,6 +702,38 @@ const BusinessRegister = () => {
                         : ""}
                     </span>
                   </div>
+                  
+                  <div>
+                    <input
+                      id="password"
+                      className={`input ${
+                        formik.errors.password && formik.touched.password
+                          ? "is-danger"
+                          : ""
+                      }`}
+                      type="password"
+                      placeholder="Contraseña"
+                      value={formik.values.password}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    ></input>
+                    <span
+                      id="error-a"
+                      className={`error-message ${
+                        formik.errors.password && formik.touched.password
+                          ? "visible"
+                          : ""
+                      }`}
+                    >
+                      {formik.errors.password && formik.touched.password
+                        ? formik.errors.password
+                        : ""}
+                    </span>
+                  </div>
+
+
+
+
                 </div>
 
                 <div className="second-column-inputs">
@@ -574,6 +807,7 @@ const BusinessRegister = () => {
                       type="file"
                       id="fileSelect"
                       hidden
+                      multiple
                       onChange={(e) => {
                         formik.setFieldValue(
                           "fileSelect",
@@ -581,7 +815,7 @@ const BusinessRegister = () => {
                         );
                       }}
                     />
-                    <label htmlFor="fileSelect" className="fileSelect">
+                    <label htmlFor="fileSelect"  className="fileSelect" >
                       <img src={imagesFormRest.action} alt="" />
                       Logo Restaurante
                     </label>
@@ -604,6 +838,42 @@ const BusinessRegister = () => {
                         : ""}
                     </span>
                   </div>
+
+                  <div>
+                    <input
+                      id="confirmPassword"
+                      className={`input ${
+                        formik.errors.confirmPassword && formik.touched.confirmPassword
+                          ? "is-danger"
+                          : ""
+                      }`}
+                      type="password"
+                      placeholder="Repetir contraseña"
+                      value={formik.values.confirmPassword}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    ></input>
+                    <span
+                      id="error-a"
+                      className={`error-message ${
+                        formik.errors.confirmPassword && formik.touched.confirmPassword
+                          ? "visible"
+                          : ""
+                      }`}
+                    >
+                      {formik.errors.confirmPassword && formik.touched.confirmPassword
+                        ? formik.errors.confirmPassword
+                        : ""}
+                    </span>
+                  </div>
+
+
+
+
+
+
+
+
                 </div>
               </div>
               <div className="last-line-A">
@@ -703,6 +973,7 @@ const BusinessRegister = () => {
                       </div>
                     </div>
                   </div>
+
                   <span
                     className={`error-message-b${
                       formikRest.errors.foodStyles &&
@@ -1052,8 +1323,14 @@ const BusinessRegister = () => {
                         ))}
                       </select>
                     </div>
+                  
                   </div>
                 ))}
+ {formikRest.touched.weekSchedule && formikRest.errors.weekSchedule && (
+  <p className="error-message-b pi">
+    {formikRest.errors.weekSchedule}
+  </p>
+)}
               </div>
               <div className="flex-line last-line">
                 <div className="next-B" onClick={goBack}>
@@ -1076,35 +1353,74 @@ const BusinessRegister = () => {
                   Registrar Restaurante
                 </button>
                 <div>
-                <label className="terms checkbox">
-                  <input
-                    checked={formikRest.values.terms}
-                    onChange={formikRest.handleChange}
-                    type="checkbox"
-                    id="terms"
-                    className={`ckeck-box${
-                      formikRest.errors.terms && formikRest.touched.terms
-                        ? "red"
-                        : ""
-                    }`}
-                  />
-                </label>
-                <p className="terms" onClick={openModal}>Politica de privacidad</p>
-                  </div>
-                  {modalVisible && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            {/* Contenido del modal */}
-            <textarea placeholder="Término 1" />
-            <textarea placeholder="Término 2" />
-            <textarea placeholder="Término 3" />
+                  <label className="terms checkbox">
+                    <input
+                      checked={formikRest.values.terms}
+                      onChange={formikRest.handleChange}
+                      type="checkbox"
+                      id="terms"
+                      className={`ckeck-box${
+                        formikRest.errors.terms && formikRest.touched.terms
+                          ? "red"
+                          : ""
+                      }`}
+                    />
+                  </label>
+                        
+                  <p className="terms" onClick={openModal}>
+                    Politica de privacidad
+                  </p>
+                </div>
+                {modalVisible && (
+                  <div className="modal-overlay" onClick={closeModal}>
+                    <div
+                      className="modal-content"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className="politics-title">
+                        <h3 className="politic">Politica de privacidad</h3>
+                      </div>
+                      <div className="textsContainer">
+                        <div className="">
+                          <p>Pol. de cancelamiento</p>
+                          <textarea
+                            class="textarea has-fixed-size "
+                            readOnly
+                            placeholder={terms}
+                          ></textarea>
+                        </div>
+                        <div>
+                          <p>Pol. de reserva</p>
+                          <textarea
+                            class="textarea has-fixed-size "
+                            readOnly
+                            placeholder={terms}
+                          ></textarea>
+                        </div>
+                        <div>
+                          <p>Pol. de intereses</p>
+                          <textarea
+                            class="textarea has-fixed-size "
+                            readOnly
+                            placeholder={terms}
+                          ></textarea>
+                        </div>
+                        <div>
+                          <p>Pol. de colaborador</p>
+                          <textarea
+                            class="textarea has-fixed-size "
+                            readOnly
+                            placeholder={terms}
+                          ></textarea>
+                        </div>
+                      </div>
 
-            <div className="close-button" onClick={closeModal}>
-              X
-            </div>
-          </div>
-        </div>
-      )}
+                      <div className="close-button" onClick={closeModal}>
+                        X
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

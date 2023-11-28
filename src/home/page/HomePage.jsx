@@ -12,7 +12,7 @@ export const HomePage = () => {
 
   return (
     <>
-       <HeaderRegisterRest />
+      <HeaderRegisterRest />
       <Header />
       <HeaderSearch />
       <FoodTypes />
