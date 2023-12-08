@@ -1,19 +1,41 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Card from "./Card";
 import "../../../assets/bulma.css";
 import "./home.css";
 import { images } from "../../../constants";
-import { useEffect } from "react";
-import { UserContext } from "../../../context/UserContext";
 import { Modal } from "../modal/Modal";
+import { useAuth } from "../../../context/AuthContext";
+import { useItemsCart } from "../../../hooks/useItemsCart";
 
 const Home = ({ page }) => {
-  const [restaurant, setRestaurant] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
   const [currentPage, setCurrentPage] = useState(page);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
-  const { handlerAddProductCart } = useContext(UserContext);
+  const navigate = useNavigate();
+  const { handlerAddProductCart } = useItemsCart();
+  const { user, token } = useAuth();
+
+  const imagesModal = [
+    {
+      img: "../../../../public/Alquimista/Captura de pantalla de 2023-12-07 18-54-56.png",
+    },
+    {
+      img: images.cafe,
+    },
+    {
+      img: images.logoElTioBistro,
+    },
+    {
+      img: "../../../../public/La Chingada/Captura de pantalla de 2023-12-07 19-06-12.png",
+    },
+    {
+      img: "../../../../public/tandory/Captura de pantalla de 2023-12-07 18-51-09.png",
+    },
+  ];
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -34,7 +56,26 @@ const Home = ({ page }) => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8080/v1/api/restaurants")
+    // Redirige a la página 1 si la página solicitada es menor que 1
+    if (currentPage < 1) {
+      navigate("/home/1");
+      window.location.reload();
+      return;
+    }
+
+    fetchRestaurants();
+    window.scrollTo(0, 0);
+  }, [currentPage]);
+
+  const fetchRestaurants = () => {
+    const backendPage = currentPage - 1;
+    const url = `http://localhost:8080/v1/api/restaurants/pages?page=${backendPage}&size=10&sort=name,asc`;
+
+    setLoading(true);
+
+    fetch(url, {
+      method: "GET",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -42,62 +83,59 @@ const Home = ({ page }) => {
         return response.json();
       })
       .then((data) => {
-        setRestaurant(data);
+        setRestaurants(data.content);
+        setTotalPages(data.totalPages);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-  }, []);
-
-  useEffect(() => {
-    // console.log(restaurant);
-  }, [restaurant]);
-
-  const cardsPerPage = 10;
-  const totalPages = Math.ceil(restaurant.length / cardsPerPage);
-  const displayRange = 1;
-
-  const pagesToShow = [];
-  for (
-    let i = Math.max(1, currentPage - displayRange);
-    i <= Math.min(totalPages, currentPage + displayRange);
-    i++
-  ) {
-    pagesToShow.push(i);
-  }
-
-  const nextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
+  const handlePageChange = (newPage) => {
+    setLoading(true);
+    setCurrentPage(newPage);
+    navigate(`/home/${newPage}`);
   };
 
-  const prevPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  const getFood = () => {
+    return restaurants.map((rest, index) => {
+      const categoryArray = rest.foodTypes.map((foodType) => foodType.name);
+      const categoryString = categoryArray.join("-");
+
+      return {
+        ...rest,
+        categoryString: categoryString,
+      };
+    });
   };
 
   return (
     <>
       <div className="cards-container">
         <div className="flex-restaurant">
-          <h1 className="mostSearched">Los mas buscados</h1>
+          {!loading && <h1 className="mostSearched">Los mas buscados</h1>}
+          <div className="first-l">
+            {loading && <div className="lds-dual-ring"></div>}
+          </div>
           <div className="grid-card">
-            {restaurant
-              .slice(
-                (currentPage - 1) * cardsPerPage,
-                currentPage * cardsPerPage
-              )
-              .map((restaurant, index) => (
+            {!loading &&
+              restaurants.map((restaurant, index) => (
                 <Card
                   key={index}
-                  id={restaurant.id_restaurant}
                   name={restaurant.name}
                   rating={restaurant.rating}
                   location={restaurant.address}
-                  image_url={images.logoElTioBistro}
+                  image_url={imagesModal[index % imagesModal.length].img}
                   reviews={"275"}
                   liked={true}
-                  category={restaurant.category.name}
+                  category={restaurant.foodTypes
+                    .map((foodType) => foodType.name)
+                    .join("/")}
                   handleAddToCart={() => handleAddToCart(restaurant)}
                   openModal={() => handleCardClick(restaurant)}
+                  id={restaurant.id_restaurant}
                 />
               ))}
           </div>
@@ -116,72 +154,34 @@ const Home = ({ page }) => {
           <Link
             to={`/home/${currentPage - 1}`}
             className={`pagination-previous ${
-              currentPage === 1 ? "is-disabled" : ""
+              currentPage === 1 ? "is-disabled none" : ""
             }`}
-            onClick={prevPage}
+            onClick={() => handlePageChange(currentPage - 1)}
           >
             {"<"}
           </Link>
           <ul className="pagination-list">
-            {currentPage - displayRange > 1 && (
-              <>
-                <li>
-                  <Link
-                    to={`/home/1`}
-                    className={`pagination-link`}
-                    aria-label={`Goto page 1`}
-                    onClick={() => setCurrentPage(1)}
-                  >
-                    1
-                  </Link>
-                </li>
-                {currentPage - displayRange > 2 && (
-                  <li>
-                    <span className="pagination-ellipsis">&hellip;</span>
-                  </li>
-                )}
-              </>
-            )}
-            {pagesToShow.map((pageNumber) => (
+            {[...Array(totalPages).keys()].map((pageNumber) => (
               <li key={pageNumber}>
                 <Link
-                  to={`/home/${pageNumber}`}
+                  to={`/home/${pageNumber + 1}`}
                   className={`pagination-link ${
-                    currentPage === pageNumber ? "is-current" : ""
+                    currentPage === pageNumber + 1 ? "is-current" : ""
                   }`}
-                  aria-label={`Goto page ${pageNumber}`}
-                  onClick={() => setCurrentPage(pageNumber)}
+                  aria-label={`Goto page ${pageNumber + 1}`}
+                  onClick={() => handlePageChange(pageNumber + 1)}
                 >
-                  {pageNumber}
+                  {pageNumber + 1}
                 </Link>
               </li>
             ))}
-            {currentPage + displayRange < totalPages && (
-              <>
-                {currentPage + displayRange < totalPages - 1 && (
-                  <li>
-                    <span className="pagination-ellipsis">&hellip;</span>
-                  </li>
-                )}
-                <li>
-                  <Link
-                    to={`/home/${totalPages}`}
-                    className={`pagination-link`}
-                    aria-label={`Goto page ${totalPages}`}
-                    onClick={() => setCurrentPage(totalPages)}
-                  >
-                    {totalPages}
-                  </Link>
-                </li>
-              </>
-            )}
           </ul>
           <Link
             to={`/home/${currentPage + 1}`}
             className={`pagination-next ${
-              currentPage === totalPages ? "is-disabled" : ""
+              currentPage === totalPages ? "is-disabled none" : ""
             }`}
-            onClick={nextPage}
+            onClick={() => handlePageChange(currentPage + 1)}
           >
             {">"}
           </Link>

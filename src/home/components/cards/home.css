@@ -1,66 +1,135 @@
-
-.cards-container{
+.cards-container {
   flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100;
+  width: 100%;
 }
 
-.flex-restaurant{
+.flex-restaurant {
   display: flex;
   align-items: left;
   justify-content: center;
   flex-direction: column;
   margin-right: 25px;
+  border-radius: 10px;
 }
 
-  .grid-card {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 50px;
-  
+.grid-card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 300px;
+  gap: 50px;
 }
 
-
-.pagination{
+.img-grid {
+  width: auto;
+  height: 230px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.pagination {
   height: 200px;
 }
 
-
-.is-current{
-  background-color: rgba(173, 136, 71, 1) !important;
+.is-current {
+  background-color: #ad8847 !important;
   border-color: black !important;
 }
 
-.mostSearched{
+.mostSearched {
   font-family: Roboto;
   font-weight: 500;
   color: rgba(173, 154, 154, 1);
   font-size: 30px;
-  align-self: left;
-  
+  text-align: left;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
+.most-div {
+  display: flex;
+  justify-content: start;
+  width: 80%;
+}
 
+.lds-dual-ring {
+  margin-top: 20px;
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 2px;
+  border-radius: 50%;
+  border: 6px solid #ad8847;
+  border-color: #ad8847 transparent #000000 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+.none {
+  cursor: not-allowed;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.first-l {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes prixClipFix {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+  }
+  25% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+  }
+  50% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+  }
+  75% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+  }
+}
 
 @media (max-width: 668px) {
   .grid-card {
     grid-template-columns: repeat(1, 1fr) !important;
     gap: 5px !important;
   }
-  .card-m{
+  .card-m {
     width: 95vw !important;
     height: 68vw !important;
   }
 }
 
 @media (min-width: 669px) and (max-width: 1300px) {
-  .grid-card{
-    grid-template-columns: repeat(2, 1fr); 
-    
+  .grid-card {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .card-m{
+  .card-m {
     width: 38vw;
     height: 25vw;
   }

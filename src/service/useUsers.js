@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "http://50.17.17.138:8080";
 
 const userUsers = {
   login: async (credentials) => {

@@ -1,11 +1,11 @@
 import React from "react";
-import { Login } from "../components/LoginPage/Login";
+import UserLogin from "../components/LoginPage/UserLogin";
 import Footer from "../../ui/Footer/Footer";
 
 export const LoginPage = () => {
   return (
     <>
-      <Login />
+      <UserLogin />
       <Footer />
     </>
   );

@@ -1,11 +1,11 @@
 import React from "react";
-import { Register } from "../components/UserRegisterPage/Register";
 import Footer from "../../ui/Footer/Footer";
+import UserRegister from "../components/UserRegisterPage/UserRegister";
 
 export const RegisterPage = () => {
   return (
     <>
-      <Register />
+      <UserRegister />
       <Footer />
     </>
   );

@@ -5,9 +5,18 @@ import { imagesHoodtypes } from "../../../constants";
 
 const cardHelper = () => {
   return [
-    { title: "Cafe", src: imagesHoodtypes.comidaCafe },
-    { title: "Carnes", src: imagesHoodtypes.comidaCarnes },
-    { title: "China", src: imagesHoodtypes.comidaChina },
+    { 
+      title: "Cafe", 
+      src: imagesHoodtypes.comidaCafe 
+    },
+    { 
+      title: "Carnes", 
+      src: imagesHoodtypes.comidaCarnes 
+    },
+    { 
+    title: "China", 
+    src: imagesHoodtypes.comidaChina 
+    },
     {
       title: "Italiana",
       src: imagesHoodtypes.comidaItaliana,
@@ -20,18 +29,30 @@ const cardHelper = () => {
       title: "Mejicana",
       src: imagesHoodtypes.comidaMejicana,
     },
-    { title: "Brunch", src: imagesHoodtypes.comidaBrounches },
+    { 
+      title: "Brunch", 
+      src: imagesHoodtypes.comidaBrounches 
+    },
     {
       title: "Colombiana",
       src: imagesHoodtypes.comidaColombiana,
     },
-    { title: "Chilena", src: imagesHoodtypes.comidaChilena },
+    { 
+      title: "Chilena", 
+      src: imagesHoodtypes.comidaChilena 
+    },
     {
       title: "Brasileña",
       src: imagesHoodtypes.comidaBrasilera,
     },
-    { title: "Hindú", src: imagesHoodtypes.comidaHindu },
-    { title: "Peruana", src: imagesHoodtypes.comidaPeruana },
+    { 
+    title: "Hindú", 
+    src: imagesHoodtypes.comidaHindu 
+    },
+    { 
+    title: "Peruana", 
+    src: imagesHoodtypes.comidaPeruana 
+    },
   ];
 };
 export default cardHelper;

@@ -2,10 +2,10 @@ import "./main.css";
 import "./home.css";
 import "../../../assets/bulma.css";
 import imagesCards from "../../../constants/images-cards";
+import { icons } from "../../../constants";
 
+import { useItemsCart } from "../../../hooks/useItemsCart";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { Modal } from "../modal/Modal";
 
 const Card = ({
   rating,
@@ -13,18 +13,19 @@ const Card = ({
   category,
   location,
   image_url,
-  reviews,
-  liked,
-  handleAddToCart,
   openModal,
+  id,
 }) => {
+  const { handlerAddFav } = useItemsCart();
+
+  const generarNumeroAleatorio = () => Math.floor(Math.random() * 535) + 232;
   const getStarImage = (rating) => {
     const starImages = {
-      1: imagesCards.oneStar,
-      2: imagesCards.twoStar,
-      3: imagesCards.threeStar,
-      4.5: imagesCards.fourStar,
-      5: imagesCards.fiveStar,
+      1.0: imagesCards.oneStar,
+      2.0: imagesCards.twoStar,
+      3.0: imagesCards.threeStar,
+      4.0: imagesCards.fourStar,
+      5.0: imagesCards.fiveStar,
     };
 
     return starImages[rating] || "defaultImage";
@@ -33,16 +34,21 @@ const Card = ({
   return (
     <>
       <div className="card-m">
-        <img src={image_url} alt="" />
+        <img
+          className="img-grid"
+          src={image_url}
+          alt="img-grid"
+          onClick={() => openModal()}
+        />
 
         <div className="card__info">
-          <Link className="titles">
+          <Link href="#" className="titles" onClick={() => openModal()}>
             {name}
-
-            <Link href="#" className="category">
-              {category}
-            </Link>
           </Link>
+
+          <div href="#" className="category">
+            <p>{category}</p>
+          </div>
 
           <span className="pages ">{location}</span>
           <div>
@@ -51,14 +57,13 @@ const Card = ({
               alt={`Rating: ${rating} stars`}
               className="star"
             />
-            <span className="reviews">{`(${reviews} reviews)`}</span>
+            <span className="reviews">{`(${generarNumeroAleatorio()} reviews)`}</span>
             <img
-              src={liked ? imagesCards.likeOn : imagesCards.likeOff}
-              alt=""
+              src={icons.heart}
+              alt="icon-heart"
               className="like-button"
+              onClick={() => handlerAddFav(id)}
             />
-            <button onClick={() => handleAddToCart()}>agregar</button>
-            <button onClick={() => openModal()}>Abrir</button>
           </div>
         </div>
       </div>

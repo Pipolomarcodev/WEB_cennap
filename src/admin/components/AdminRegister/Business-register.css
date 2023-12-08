@@ -79,7 +79,7 @@
   font-family: Exo;
   font-weight: 500;
 
-  color: red;
+  color: var(--color-validation-red);
   font-size: 13px;
 }
 
@@ -96,6 +96,10 @@
   position: absolute;
 }
 
+.third-line{
+  align-items: start;
+}
+
 .input-t {
   width: 100%;
 }
@@ -104,8 +108,16 @@
   width: 200px;
 }
 
+#city{
+  height: 44px !important;
+}
+
+#ciudad-div{
+  height: 40px !important;
+}
+
 .drop-error {
-  border: 1px solid red;
+  border: 1px solid var(--color-validation-red);
 }
 
 .fourth-line input {
@@ -299,6 +311,7 @@ textarea {
   align-self: flex-start;
   justify-self: flex-end;
   margin-right: 12px;
+  position: relative;
 }
 
 .sub {
@@ -448,7 +461,7 @@ textarea {
 }
 
 .is-danger-text {
-  border: solid 0.9px red !important;
+  border: solid 0.9px var(--color-validation-red) !important;
 }
 
 .area-error {
@@ -457,7 +470,7 @@ textarea {
 
 .error-message-c {
   position: relative !important;
-  color: red !important;
+  color: var(--color-validation-red)!important;
 }
 
 .pi {
@@ -524,11 +537,6 @@ textarea {
 }
 
 
-
-.textsContainer div{
-
-}
-
 .politic{
   font-size:x-large;
 }
@@ -537,3 +545,54 @@ textarea {
   background-color:  rgb(245, 245, 245);
   border: 0.1px solid rgba(0, 0, 0, 0.044);
 }
+
+#files-container{
+  position: absolute;
+  height: 1px;
+  top: 55px;
+  width: 250px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.files-name{
+  font-size: smaller;
+}
+
+.files-error{
+  margin-left: 180px !important;
+  margin-top: 15px !important;
+  width: 200px;
+}
+
+.loader {
+  margin-right: 25px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 4px solid #FFF;
+  border-right: 4px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border-bottom: 4px solid rgba(173, 136, 71, 1);
+  border-left: 4px solid transparent;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 

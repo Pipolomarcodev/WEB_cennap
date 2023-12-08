@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './userprofile.module.css'; 
+import { useAuth } from '../../../context/AuthContext';
 
 /**************************************************************/ 
 /********************  USER PROFILE COMPONENT *****************/ 
@@ -7,25 +8,20 @@ import styles from './userprofile.module.css';
 
 const UserProfile = () => {
   const [profileImage, setProfileImage] = useState('');
-
-  useEffect(() => {
-    // Llama a la API para obtener la imagen de perfil del usuario y actualiza el estado
-  }, []); 
-
+  const { user } = useAuth();
+  
+  
   return (
 
     <div 
         className={styles.userProfile}
         >
-      <div 
-        className={styles.profileImageWrapper}
-        >
-        <span 
-            className={styles.initials}
-            >
-                JP
-        </span>
-      </div>
+         <div className="circle-cont">
+              <div className="circle">
+                <span>{user.name ? user.name[0].toUpperCase() : ""}</span>
+                <span>{user.last_name ? user.last_name[0].toUpperCase() : ""}</span>
+              </div>
+            </div>
       <div 
         className={styles.userInfo}
         >

@@ -1,34 +1,50 @@
 import AdminSideBar from "./AdminSideBar";
 import cenappLogoM from "./svg/cenManagerLogoBlack.svg";
-import BarData from "./DataBarHelper";
 import styles from "./adminscreen.module.css";
 import DataBar from "./DataBar";
-import { useEffect, useState } from "react";
-import { findAll } from "../../../service/useAdmin";
+import RestaurantModal from "./RestaurantModal";
+import CreateRestaurant from "./CreateRestaurant";
+import { useState, useEffect } from "react";
 import { images } from "../../../constants";
-
-/**************************************************************/
-/************  ADMIN CONTROL PANEL CLIENT SCREEN  *************/
-/**************************************************************/
+import { useAdmin } from "../../hook/useAdmin";
+import { useAuth } from "../../../context/AuthContext";
 
 const AdminScreen = () => {
-  const [restaurantes, setRestaurantes] = useState([]);
+  const { restaurantes, restLoading } = useAdmin();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisibleCreate, setModalVisibleCreate] = useState(false);
+  const [selectedRestaurantId, setSelectedRestaurantId] = useState(null); // Nuevo estado
+  const { user } = useAuth();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await findAll();
-        console.log(data);
-        setRestaurantes(data); // Supongo que la respuesta es un array de restaurantes
-      } catch (error) {
-        console.error("Error al cargar los restaurantes:", error);
-      }
-    };
+  const handleSelectRestaurant = (id) => {
+    setSelectedRestaurantId(id);
+  };
 
-    fetchData();
-  }, []);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  const openModalCreate = () => {
+    setModalVisibleCreate(true);
+  };
+
+  const closeModalCreate = () => {
+    setModalVisibleCreate(false);
+  };
+
   return (
     <div className={styles.appContainer}>
+      {modalVisible ? <RestaurantModal closeModal={() => closeModal} restid={selectedRestaurantId} /> : ""}
+      {modalVisibleCreate ? (
+        <CreateRestaurant closeModal={() => closeModalCreate} />
+      ) : (
+        ""
+      )}
       <div className={styles.background}>
         <div className={styles.titleLogoContainer}>
           <h1 className={styles.title}>Mis Restaurantes</h1>
@@ -52,31 +68,45 @@ const AdminScreen = () => {
             </thead>
           </table>
         </div>
-  
+
         <div className={styles.barsContainer}>
           <div className={styles.dataContainer}>
-            
+            {restLoading && (
+              <div className="modal-overlay-r">
+                <div className="loader-cont">
+                  <img src={images.logoInsolate} alt="" className="loader-r" />
+                </div>
+              </div>
+            )}
 
-            {restaurantes.map((category, index) => (
-              <DataBar
-                key={index}
-                id={category.id_restaurant}
-                src={images.logoElTioBistro}
-                nombre={category.name}
-                pais={category.address}
-                tipoCocina={category.category.name}
-                telefono={category.phone}
-                estado={category.active}
-
-              />
-            ))}
+            {!restLoading && restaurantes.length > 0 && (
+              <>
+                {restaurantes.map((category, index) => (
+                  <DataBar
+                    openModal={() => openModal}
+                    closeModal={() => closeModal}
+                    key={index}
+                    id={category.id_restaurant}
+                    src={images.logoInsolate}
+                    nombre={category.name}
+                    pais={category.address}
+                    tipoCocina={category.foodTypes[0].name}
+                    telefono={category.phone}
+                    estado={category.active}
+                    restaurant={category}
+                    selected={category.id_restaurant === selectedRestaurantId} // Nuevo prop
+                    onSelect={handleSelectRestaurant} // Nuevo prop
+                  />
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>
 
       {/*************** SIDE BAR ADMIN PANEL***************/}
       <div className={styles.contentContainer}>
-        <AdminSideBar />
+        <AdminSideBar openModal={() => openModalCreate} />
       </div>
     </div>
   );

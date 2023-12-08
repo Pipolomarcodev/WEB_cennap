@@ -1,24 +1,34 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { icons } from "../../../constants";
 import "./headerlogin.css";
-import { UserContext } from "../../../context/UserContext";
 import { Link } from "react-router-dom";
-import { ReserveTrolley } from "../../../user/components/reserveTrolley/ReserveTrolley";
+import { useAuth } from "../../../context/AuthContext";
 
 export const HeaderLogin = () => {
-  const { logout } = useContext(UserContext);
   const [config, setConfig] = useState(false);
+  const { user, logout, token, verifyUser } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+  };
+
   const toggleNavConf = () => {
     setConfig(!config);
   };
+
+  const getInitial = (name) => (name ? name.charAt(0).toUpperCase() : "");
+
   return (
     <div className="nav-login">
-      <div className="perfil-login">
-        <button className="button-login" onClick={toggleNavConf}>
-          <img src={icons.Empty} alt="svg" />
-        </button>
-        <ReserveTrolley />
-      </div>
+      <button className="button-login" onClick={toggleNavConf}>
+        <h3>
+          {user.name} {user.last_name}
+        </h3>
+        <div className="circle">
+          <span>{getInitial(user.name)}</span>
+          <span>{getInitial(user.last_name)}</span>
+        </div>
+      </button>
 
       <div
         className={`nav-conf ${
@@ -27,12 +37,19 @@ export const HeaderLogin = () => {
       >
         {config && (
           <>
-            <h1>Hola Marco</h1>
-            <Link className="clone-user" onClick={logout}>
-              Cerrar sesión
-            </Link>
-            <Link to={"/user/user-panel"}>Mis Reservas</Link>
-            <Link to={"/user/user-profile"}>Configuración</Link>
+            <div>
+              {user.roles == "ROLE_USER" ? (
+                <Link to={"/user/user-panel"}>Mis Reservas</Link>
+              ) : (
+                <Link to={"/admin/admin-panel"}>Gestionar restaurantes</Link>
+              )}
+            </div>
+            <div>
+              <Link to={"/user/user-profile"}>Configuración</Link>
+            </div>
+            <div>
+              <button onClick={handleLogout}>Cerrar Sesion</button>
+            </div>
           </>
         )}
       </div>
