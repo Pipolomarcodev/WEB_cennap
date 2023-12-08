@@ -33,10 +33,6 @@ jobs:
     needs: build
 
     steps:
-      - name: Veo archivos
-        run: |
-          ls -la
-
       - name: Configuro Credenciales de AWS 
         uses: aws-actions/configure-aws-credentials@v1
         with:
