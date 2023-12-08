@@ -30,8 +30,8 @@ jobs:
       - name: Subiendo Build a Bucket
         uses: actions/upload-artifact@v2
         with:
-          name: build
-          path: build
+          name: dist 
+          path: dist 
 
       - name: Configuro Credenciales de AWS 
         uses: aws-actions/configure-aws-credentials@v1
