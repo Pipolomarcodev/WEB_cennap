@@ -3,26 +3,81 @@
   align-items: center;
   justify-content: space-around;
   margin-right: 50px;
-  .button-login {
-    background-color: #00000094;
-    border: none;
-    background-color: none;
-    cursor: pointer;
-  }
-
-  & h3 {
-    font-size: 20px;
-    color: #fff;
-  }
 }
 
-.perfil-login {
+.button-login {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  display: flex; /* Añadido para que los elementos internos del botón estén en fila */
+  align-items: center; /* Alinea los elementos internos al centro */
+}
+
+.button-login img {
+  margin-right: 10px; /* Ajusta el espacio entre la imagen y el texto (puedes ajustar según tu preferencia) */
+}
+
+.nav-login h3 {
+  font-size: 20px;
+  color: #fff;
+  margin-right: 10px; /* Ajusta el espacio entre el texto y otros elementos (puedes ajustar según tu preferencia) */
+}
+
+
+.nav-conf {
+  width: 225px;
+  height: 125px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Cambiado de 'center' a 'space-between' */
+  align-items: center;
+  position: absolute;
+  border-radius: 20px;
+  font-size: medium;
+  top: 68px;
+  margin-right: 50px;
+  background-color: rgb(0, 0, 0); /*glass */
+  backdrop-filter: blur(0.2px); /* desenfoque */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /*Sombra*/
+}
+
+.nav-conf div {
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  & button {
-    margin-right: 20px;
-  }
+  align-items: center; /* Añadido para centrar verticalmente los elementos internos */
+  height: 100%; /* Añadido para ocupar toda la altura disponible */
+}
+
+.nav-conf div a {
+  color: white;
+}
+
+.nav-conf div a:hover {
+  color: rgb(196, 167, 99);
+}
+
+
+.nav-conf div:hover {
+  color: red;  border-radius: 20px;
+}
+
+.nav-conf div button {
+  background: linear-gradient(
+    90deg,
+    #926228 2.73%,
+    hsl(38, 42%, 48%) 39.78%,
+    rgb(196, 167, 99) 67.79%,
+    #f5ec9a 107.96%
+  );
+  width: 88%;
+  color: white;
+  border-radius: 20px;
+  height: 30px;
+  text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.05em;
+  cursor: pointer;
+
 }
 
 .clone-user {
@@ -31,26 +86,34 @@
   border-radius: 10px;
 }
 
-.nav-conf {
-  width: 250px;
-  height: 200px;
+.circle {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(90deg, #926228 2.73%, #AD8847 39.78%, #C5A862 67.79%, #F5EC9A 107.96%);
+
+  border: 2px solid white;
+  border-radius: 50%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  position: absolute;
-  border-radius: 20px;
-  top: 110px;
-  background-color: #00000094;
-  & a {
-    font-size: 20px;
-    color: white;
-    margin-top: 20px;
-  }
+  justify-content: center;
+  font-size: 19px;
+  color: white;
+
 }
+.circle span {
+
+  display: inline-block;
+  transform: translateY(-2px);
+}
+
 
 @media (max-width: 900px) {
   .nav-login {
     display: none;
   }
+}
+
+/* Añadido para ajustar el espacio entre los elementos del botón cuando está en pantallas pequeñas */
+.button-login.mobile {
+  margin-right: 10px;
 }

@@ -1,0 +1,76 @@
+/* Estilos para el contenedor del DatePicker */
+.react-datepicker {
+  display: inline-block !important;
+  padding: 20px !important;
+  border-radius: 25px !important;
+  border: none !important;
+}
+
+/* Estilos para el input del DatePicker */
+.react-datepicker__month-container {
+  border-radius: 25px !important;
+  padding: 5px !important;
+}
+
+.react-datepicker__current-month {
+  color: rgba(0, 0, 0, 0.87);
+
+  text-align: center;
+
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: normal !important;
+  margin-bottom: 10px !important;
+}
+/* Estilos para el calendario DatePicker */
+.react-datepicker {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Estilos para los días del calendario DatePicker */
+.react-datepicker__day {
+  color: #333 !important;
+  font-size: 12px !important;
+  margin: 4.5px !important;
+}
+
+.react-datepicker__day-names {
+  font-family: Roboto !important;
+  font-size: 12px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 20px !important;
+  letter-spacing: 0.32px !important;
+}
+/* Estilos para el botón del calendario DatePicker */
+.react-datepicker__navigation {
+  top: 20px !important;
+  right: 10px !important;
+}
+
+/* Estilos para el día seleccionado en el calendario DatePicker */
+.react-datepicker__day--selected {
+  background-color: var(--color-golden) !important;
+  color: #fff !important;
+  border-radius: 50px !important;
+  transition: all 200ms !important;
+}
+
+.react-datepicker__day--selected:hover {
+  background-color: var(--color-golden-secundary) !important;
+  font-size: 13px !important;
+  border-radius: 50px !important;
+}
+
+/* Estilos para el rango de días seleccionados en el calendario DatePicker */
+.react-datepicker__day--in-range {
+  background-color: var(--color-golden) !important;
+  color: #fff !important;
+}
+
+.react-datepicker__header {
+  background-color: #fff !important;
+}

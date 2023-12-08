@@ -4,7 +4,6 @@ import verduraAsada from "../assets/images-cards/img/img-rest.png";
 import logoWhite from "../assets/images-cards/img/logo-white-form.png";
 import platoComida from "../assets/images-cards/img/Rectangle8.png";
 import oneStar from "../assets/images-cards/img/Rating=1 Star.svg";
-
 import twoStar from "../assets/images-cards/img/Rating=2 Stars.svg";
 import threeStar from "../assets/images-cards/img/Rating=3 Stars.svg";
 import fourStar from "../assets/images-cards/img/Rating=4 Stars.svg";

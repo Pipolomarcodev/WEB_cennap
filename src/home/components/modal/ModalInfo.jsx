@@ -1,39 +1,42 @@
-import React from "react";
+import { icons, images } from "../../../constants";
 
-export const ModalInfo = ({ restaurant }) => {
+export const ModalInfo = ({ restaurant, category }) => {
   return (
     <>
-      <div className="flex-content">
-        <div className="flex-data">
-          <img src="/src/components/modal/img/socialShare.svg" alt="" />
-          <img src="/src/components/modal/img/heart.svg" alt="" />
-          <img src="/src/home/components/modal/img/logo.png" alt="logo" />
-          <div class="rating">
-            <input value="5" name="rate" id="star5" type="radio" />
-            <label title="text" for="star5" />
-            <input value="4" name="rate" id="star4" type="radio" />
-            <label title="text" for="star4" />
-            <input value="3" name="rate" id="star3" type="radio" checked="" />
-            <label title="text" for="star3" />
-            <input value="2" name="rate" id="star2" type="radio" />
-            <label title="text" for="star2" />
-            <input value="1" name="rate" id="star1" type="radio" />
-            <label title="text" for="star1" />
+      <img src={images.logo} alt="logo" />
+      <div className="flex-info">
+        <div className="flex-info-text">
+          <h3>
+            {restaurant.name} | {restaurant.phone}
+          </h3>
+        </div>
+        <div className="modal-info">
+          <h4>Tipo de comida: {category}</h4>
+          <div className="modal-service">
+            <h4>Servicios | </h4>
+            <img src={icons.spaghetti} alt="" />
+            <img src={icons.spaghetti} alt="" />
           </div>
         </div>
-        <p>Uruguay | Barrio Viejo, Montevideo</p>
       </div>
-      <div className="flex-data">
-        <h3>{restaurant.name} |</h3>
-        <img src="/src/components/modal/img/meat 1.png" alt="" />
-        <img src="/src/components/modal/img/spaghetti 1.png" alt="" />
-        <h4>Carnes , pastas</h4>
-      </div>
-
-      <div className="flex-service">
-        <h4>Servicios |</h4>
-        <img src="/src/components/modal/img/musical-note 1.png" alt="" />
-        <img src="/src/components/modal/img/parked-car 1.png" alt="" />
+      <div className="flex-content-start">
+        <div className="rating">
+          <input value="5" name="rate" id="star5" type="radio" />
+          <label title="text" htmlFor="star5" />
+          <input value="2" name="rate" id="star4" type="radio" />
+          <label title="text" htmlFor="star4" />
+          <input value="3" name="rate" id="star3" type="radio" />
+          <label title="text" htmlFor="star3" />
+          <input value="4" name="rate" id="star2" type="radio" />
+          <label title="text" htmlFor="star2" />
+          <input value="5" name="rate" id="star1" type="radio" />
+          <label title="text" htmlFor="star1" />
+          <p>5</p>
+        </div>
+        <div className="icons">
+          <img src={icons.socialShare} alt="icon-social" />
+          <img src={icons.heart} alt="icon-heart" />
+        </div>
       </div>
     </>
   );

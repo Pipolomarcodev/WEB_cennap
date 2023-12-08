@@ -178,6 +178,18 @@
   font-size: 14px;
 }
 
+.dis{
+  background-color: rgb(235, 234, 234) !important;
+  border: 2px solid rgb(235, 234, 234) !important;
+
+}
+
+.week-error{
+  top: 9px;
+  position: relative;
+}
+
+
 @keyframes shake {
   0%, 100% {
     transform: translateX(0);

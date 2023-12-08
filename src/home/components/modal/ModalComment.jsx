@@ -1,22 +1,21 @@
-import React from "react";
+import { icons } from "../../../constants";
 
 const ModalComment = () => {
   return (
-    <div className="comment-content">
-      <div className="comment-avatar">
-        <h2>
-          Opiniones <span>4,5</span>
-        </h2>
-        <img src="/src/components/modal/img/Avatar.svg" alt="" />
+    <>
+      <div className="comment-title">
+        <h3>
+          Valoraciones <img className="title-img" src={icons.Square} alt="" />
+        </h3>
+        <img src={icons.Avatar} alt="" />
       </div>
-
-      <p>
-        "Una sorpresa inesperada. Un sugerencia acertada de cenapp. La comida es
-        una auténtica delicia, especialmente la entraña fina con cilantro,
-        berenjenas asadas y puré. Además, el espectáculo fue un añadido
-        maravilloso, volveremos!"
-      </p>
-    </div>
+      <div className="comment-data">
+        <p>
+          "Otra sugerencia acertada de cenapp. La comida es una auténtica
+          delicia, además, el espectáculo fue maravilloso, volveremos!"
+        </p>
+      </div>
+    </>
   );
 };
 

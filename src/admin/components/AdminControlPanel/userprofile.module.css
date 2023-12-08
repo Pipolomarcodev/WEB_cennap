@@ -1,4 +1,3 @@
-
 .userProContainer{
     width: 240px;
 }
@@ -39,10 +38,31 @@
   .greeting {
     font-size: 1.25rem; 
     color: #fff;
+    margin-left: 15px;
   }
   
   .username {
     font-size: 1.25rem;
     color: #fff;
+  }
+  
+  .circle {
+    width: 55px;
+    height: 55px;
+    background: linear-gradient(90deg, #926228 2.73%, #AD8847 39.78%, #C5A862 67.79%, #F5EC9A 107.96%);
+  
+    border: 2px solid white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    color: white;
+  
+  }
+  .circle span {
+  
+    display: inline-block;
+    transform: translateY(-2px); /* Ajusta la posición vertical según sea necesario */
   }
   

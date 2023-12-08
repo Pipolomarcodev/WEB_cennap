@@ -1,11 +1,8 @@
+import { UseItemRegister } from "./UseItemRegister";
 import AdminSideBar from "./UserSideBar";
 import cenappLogoM from "./svg/cenManagerLogoBlack.svg";
-
+import "./tablas.css";
 import styles from "./userscreen.module.css";
-
-/**************************************************************/
-/************  ADMIN CONTROL PANEL CLIENT SCREEN  *************/
-/**************************************************************/
 
 const UserScreen = () => {
   return (
@@ -13,29 +10,22 @@ const UserScreen = () => {
       <div className={styles.background}>
         <div className={styles.titleLogoContainer}>
           <h1 className={styles.title}>Mis Reservas</h1>
-          {/******************  LOGO *************************/}
+
           <div className={styles.logoContainer}>
             <img className={styles.logo} src={cenappLogoM} alt="Manager-Logo" />
           </div>
         </div>
-        {/****************  HEADER TABLE ********************/}
-        <div className={styles.tableContainer}>
-          <table className={styles.transparentTable}>
-            <thead className={styles.headerTable}>
-              <tr>
-                <th>id</th>
-                <th></th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Restaurante</th>
-                <th>Realizada</th>
-                <th>Prevista</th>
-                <th>Tipo mesa</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-          </table>
-        </div>
+
+        <table className="tables-fav">
+          <thead className="tables__thead">
+            <tr>
+              <th className="tables__th">Restaurante</th>
+              <th className="tables__th">Hora</th>
+              <th className="tables__th">Fecha</th>
+            </tr>
+          </thead>
+          <UseItemRegister />
+        </table>
 
         <div className={styles.contentContainer}>
           <AdminSideBar />

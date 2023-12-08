@@ -1,25 +1,33 @@
-
-.sectionFoodTypes{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
+.sectionFoodTypes {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
-.foodTypesContainer{
-    width: 100%;
-    height: 125px;
-    margin-right: 20px;
+.foodTypesContainer {
+  width: 1146px;
+  height: 156px;
 }
 
-.foodTypesGrid{
-    display: flex;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 60px;
-    justify-content: center; 
-    align-items: center;
+.foodTypesGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 60px;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.suggestedforyou {
+  font-family: Roboto;
+  font-weight: 500;
+  color: rgba(173, 154, 154, 1);
+  font-size: 28px;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 45px;
 }

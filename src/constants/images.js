@@ -15,10 +15,13 @@ import comidaItaliana from "../assets/images/italiana.png";
 import comidaMariscos from "../assets/images/mariscos.png";
 import bg from "../assets/images/bg.png";
 import tioBristoSmall from "../assets/images/logo.png";
-import spin from "../assets/images/image 33spin.svg"
-import location from "../assets/images/Group 615.svg"
-import date from "../assets/images/Frame.svg"
-import cupcake from "../assets/images/Birthday Cupcake.svg"
+import spin from "../assets/images/image 33spin.svg";
+import location from "../assets/images/Group 615.svg";
+import date from "../assets/images/Frame.svg";
+import cupcake from "../assets/images/Birthday Cupcake.svg";
+import logo from "../assets/images/logo.png";
+import cafe from "../assets/images/cafe-3537801_1280.jpg";
+import xl from "../assets/images/searcher-background-hq.png";
 
 export default {
   location,
@@ -42,4 +45,7 @@ export default {
   comidaMariscos,
   bg,
   tioBristoSmall,
+  logo,
+  cafe,
+  xl,
 };

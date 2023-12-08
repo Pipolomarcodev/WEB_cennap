@@ -1,32 +1,31 @@
-import { useEffect, useReducer } from "react";
-import { itemsReducer } from "../reducer/itemsReducer";
-
-const inititalCartItems = JSON.parse(sessionStorage.getItem("cart")) || [];
-
 export const useItemsCart = () => {
-  const [cartItems, dispatch] = useReducer(itemsReducer, inititalCartItems);
+  const handlerAddFav = (id) => {
+    const userDataString = localStorage.getItem("user");
+    const userData = JSON.parse(userDataString);
+    const userId = userData.id;
+    const restoId = id;
+    fetch(`http://localhost:8080/auth/toggle-fav/${userId}/${restoId}`, {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Error al agregar o eliminar favorito. Código de estado: ${response.status}`
+          );
+        }
 
-  useEffect(() => {
-    sessionStorage.setItem("cart", JSON.stringify(cartItems));
-  }, [cartItems]);
+        console.log(
+          `Favorito agregado o eliminado correctamente para el usuario ${userId}.`
+        );
 
-  const handlerAddProductCart = (product) => {
-    dispatch({
-      type: "AddProductCart",
-      payload: product,
-    });
-  };
-
-  const handlerDeleteProductCart = (id) => {
-    dispatch({
-      type: "DeleteProductCart",
-      payload: id,
-    });
+        alert(`Favorito agregado o eliminado correctamente para el usuario ${userId}.`)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return {
-    cartItems,
-    handlerAddProductCart,
-    handlerDeleteProductCart,
+    handlerAddFav,
   };
 };

@@ -1,38 +1,22 @@
-import { useState, useEffect } from 'react';
-import styles from './userprofile.module.css'; 
+import { useState, useEffect } from "react";
+import styles from "./userprofile.module.css";
 
-/**************************************************************/ 
-/********************  USER PROFILE COMPONENT *****************/ 
-/**************************************************************/ 
+/**************************************************************/
+/********************  USER PROFILE COMPONENT *****************/
+/**************************************************************/
 
 const UsersProfile = () => {
-  const [profileImage, setProfileImage] = useState('');
+  const [profileImage, setProfileImage] = useState("");
 
-  useEffect(() => {
-  }, []); 
+  useEffect(() => {}, []);
 
   return (
-
-    <div 
-        className={styles.userProfile}
-        >
-      <div 
-        className={styles.profileImageWrapper}
-        >
-        <span 
-            className={styles.initials}
-            >
-                JP
-        </span>
+    <div className={styles.userProfile}>
+      <div className={styles.profileImageWrapper}>
+        <span className={styles.initials}>JP</span>
       </div>
-      <div 
-        className={styles.userInfo}
-        >
-        <span 
-            className={styles.greeting}
-            >
-                Hola!, Juan
-        </span>
+      <div className={styles.userInfo}>
+        <span className={styles.greeting}>Hola!, Usuario</span>
       </div>
     </div>
   );

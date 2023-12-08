@@ -1,15 +1,28 @@
 .link-rest {
-  background-color: var(--color-black);
+  right: 0;
+  position: absolute;
+  background-color: transparent;
   display: flex;
   justify-content: end;
   align-items: center;
-  padding-right: 70px;
+  padding-right: 65px;
+  z-index: 999;
   & a {
-    color: var(--color-black-altentive);
+    color: var(--color-grey);
     margin-left: 20px;
-    font-weight: bold;
+    font-weight: 400;
   }
   & a:hover {
     color: var(--color-white);
   }
 }
+
+.line{
+  height: 20px;
+}
+
+
+
+
+
+

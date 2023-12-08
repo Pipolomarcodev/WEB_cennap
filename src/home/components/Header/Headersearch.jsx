@@ -1,9 +1,10 @@
 import images from "../../../constants/images";
 import "./headerSearch.css";
+import { GoldenLine } from "../../../ui/LineGold/GoldenLine";
 
 export const HeaderSearch = () => {
   return (
-    <div className=" header header-background">
+    <div className="header header-background">
       <div className="field has-addons search-main">
         <div className="control search-selects">
           <div className="margin is-white">
@@ -31,7 +32,7 @@ export const HeaderSearch = () => {
             </select>
           </div>
         </div>
-        <div class="control margin ">
+        <div className="control margin ">
           <input
             className="input search-text is-static no-animation"
             type="text"
@@ -40,10 +41,11 @@ export const HeaderSearch = () => {
         </div>
         <p className="control search-logo">
           <a className="button is-static ">
-            <img src={images.spin} alt="" />
+            <img src={images.spin} alt="image-ping" />
           </a>
         </p>
       </div>
+      <GoldenLine />
     </div>
   );
 };
