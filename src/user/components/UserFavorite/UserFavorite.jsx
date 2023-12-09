@@ -17,20 +17,27 @@ const UserFavorite = () => {
             <img className={styles.logo} src={cenappLogoM} alt="Manager-Logo" />
           </div>
         </div>
+        <div className="table">
+          <div className="table-title">
+            <div className="tables__data">
+              <strong>Restaurante</strong>
+            </div>
+            <div className="tables__data">
+              <strong>Comida</strong>
+            </div>
+            <div className="tables__data">
+              <strong>telefono</strong>
+            </div>
+            <div className="tables__data">
+              <strong>ciudad</strong>
+            </div>
+            <div className="tables__data">
+              <strong>calle</strong>
+            </div>
+          </div>
 
-        <table className="tables-fav">
-          <thead className="tables__thead">
-            <tr>
-              <th className="tables__th">Restaurante</th>
-              <th className="tables__th">Comida</th>
-              <th className="tables__th">telefono</th>
-              <th className="tables__th">ciudad</th>
-              <th className="tables__th">calle</th>
-            </tr>
-          </thead>
           <UserFavoriteItem />
-        </table>
-
+        </div>
         <div className={styles.contentContainer}>
           <UserSideBar />
         </div>
