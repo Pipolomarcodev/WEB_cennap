@@ -37,7 +37,7 @@ const [loading, setLoading] = useState(false);
   }; // la redirecion a a admin
 
   useEffect(() => {
-    fetch("http://localhost:8080/v1/api/countries")
+    fetch("http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/countries")
       .then((response) => response.json())
       .then((data) => {
         setCountries(data);
@@ -204,7 +204,7 @@ Responsabilidad y Limitación de Responsabilidad:
   const isEmailAvailable = async (email) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/auth/check-email/${email}`
+        `http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/check-email/${email}`
       );
 
       if (response.status === 200) {
@@ -366,7 +366,7 @@ const mapTablesToSend = (tables) => {
 
         console.log(country_id);
 
-      fetch(`http://localhost:8080/v1/api/countries/${country_id}/cities`)
+      fetch(`http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/countries/${country_id}/cities`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -595,7 +595,7 @@ const mapTablesToSend = (tables) => {
 
     try {
       const adminResponse = await fetch(
-        "http://localhost:8080/auth/addNewUser",
+        "http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/addNewUser",
         {
           method: "POST",
           headers: {
@@ -613,7 +613,7 @@ const mapTablesToSend = (tables) => {
 
       // Step 2: Generate token
       const tokenResponse = await fetch(
-        "http://localhost:8080/auth/generateToken",
+        "http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/generateToken",
         {
           method: "POST",
           headers: {
@@ -637,7 +637,7 @@ const mapTablesToSend = (tables) => {
       // Step 3: Create restaurant
       
       const restaurantResponse = await fetch(
-        "http://localhost:8080/v1/api/restaurants/create",
+        "http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/restaurants/create",
         {
           method: "POST",
           headers: {

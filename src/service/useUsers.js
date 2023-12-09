@@ -1,4 +1,4 @@
-const BASE_URL = "http://50.17.17.138:8080";
+const BASE_URL = "http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080";
 
 const userUsers = {
   login: async (credentials) => {

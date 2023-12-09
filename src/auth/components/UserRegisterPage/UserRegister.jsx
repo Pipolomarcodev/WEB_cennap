@@ -46,7 +46,7 @@ const UserRegister = () => {
   const isEmailAvailable = async (email) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/auth/check-email/${email}`
+        `http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/check-email/${email}`
       );
       if (response.status === 200) {
         return true;
@@ -75,7 +75,7 @@ const UserRegister = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/auth/addNewUser", {
+      const response = await fetch("http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/addNewUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const UserRegister = () => {
         };
 
         const tokenResponse = await fetch(
-          "http://localhost:8080/auth/generateToken",
+          "http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/generateToken",
           {
             method: "POST",
             headers: {

@@ -10,7 +10,7 @@ export const UserFavoriteItem = () => {
       const userId = userData.id;
 
       const response = await fetch(
-        `http://localhost:8080/auth/get-fav/${userId}`,
+        `http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/get-fav/${userId}`,
         {
           method: "GET",
           headers: {

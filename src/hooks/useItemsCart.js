@@ -4,9 +4,12 @@ export const useItemsCart = () => {
     const userData = JSON.parse(userDataString);
     const userId = userData.id;
     const restoId = id;
-    fetch(`http://localhost:8080/auth/toggle-fav/${userId}/${restoId}`, {
-      method: "GET",
-    })
+    fetch(
+      `http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/toggle-fav/${userId}/${restoId}`,
+      {
+        method: "GET",
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error(
@@ -18,7 +21,9 @@ export const useItemsCart = () => {
           `Favorito agregado o eliminado correctamente para el usuario ${userId}.`
         );
 
-        alert(`Favorito agregado o eliminado correctamente para el usuario ${userId}.`)
+        alert(
+          `Favorito agregado o eliminado correctamente para el usuario ${userId}.`
+        );
       })
       .catch((error) => {
         console.error(error);

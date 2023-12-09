@@ -11,7 +11,7 @@ export const UseItemRegister = () => {
     const userData = JSON.parse(userDataString);
     const userId = userData.id;
     console.log(userId);
-    fetch(`http://localhost:8080/v1/api/reservations/user/${userId}`)
+    fetch(`http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/reservations/user/${userId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);

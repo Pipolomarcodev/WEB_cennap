@@ -79,7 +79,7 @@ export const Reserve = () => {
       user: userId,
     };
 
-    fetch("http://localhost:8080/v1/api/reservations/create", {
+    fetch("http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/reservations/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

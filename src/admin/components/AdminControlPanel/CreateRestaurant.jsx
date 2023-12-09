@@ -59,7 +59,7 @@ const CreateRestaurant = ({ closeModal }) => {
     */
 
 
-    fetch(`http://localhost:8080/v1/api/countries/${country_id}/cities`)
+    fetch(`http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/countries/${country_id}/cities`)
     .then((response) => response.json())
     .then((data) => {
       setLoading(true)

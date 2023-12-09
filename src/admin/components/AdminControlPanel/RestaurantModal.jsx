@@ -59,7 +59,7 @@ const RestaurantModal = ({ closeModal, restid }) => {
     */
 
 
-    fetch(`http://localhost:8080/v1/api/countries/${country_id}/cities`)
+    fetch(`http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/countries/${country_id}/cities`)
     .then((response) => response.json())
     .then((data) => {
       setLoading(true)
@@ -72,7 +72,7 @@ const RestaurantModal = ({ closeModal, restid }) => {
 
 
     // Llamada a la API para obtener la información del restaurante
-    fetch(`http://localhost:8080/v1/api/restaurants/${restid}`)
+    fetch(`http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/restaurants/${restid}`)
       .then((response) => response.json())
       .then((info) => {
         // Actualizar el estado y los valores iniciales del formulario

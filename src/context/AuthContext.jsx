@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
       const fetchUser = async () => {
         try {
           const response = await fetch(
-            `http://localhost:8080/auth/get-user/${storedToken}`,
+            `http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/get-user/${storedToken}`,
             {
               method: "GET",
             }
@@ -106,7 +106,7 @@ const AuthProvider = ({ children }) => {
   const verifyUser = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/auth/get-user/${state.token}`,
+        `http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/get-user/${state.token}`,
         {
           method: "GET",
         }
