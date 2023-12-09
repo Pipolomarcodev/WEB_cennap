@@ -53,20 +53,27 @@ export const UserFavoriteItem = () => {
           </tbody>
         </>
       ) : (
-        <>
-          <tbody className="tables__tbody">
-            {favoriteData.map((restaurant, index) => (
-              <tr key={index} className="tables__tr">
-                <td className="tables__td">{restaurant.id_restaurant}</td>
-                <td className="tables__td">{restaurant.foodTypes[0].name}</td>
-                <td className="tables__td">{restaurant.name}</td>
-                <td className="tables__td">{restaurant.name}</td>
-                <td className="tables__td">{restaurant.name}</td>
-                {/* Agrega más campos según la estructura de tu objeto de restaurante */}
-              </tr>
-            ))}
-          </tbody>
-        </>
+        favoriteData.map((like) => (
+          <>
+            <div className="table-datos">
+              <div className="tables__info">
+                <p>{like.name}</p>
+              </div>
+              <div className="tables__info">
+                <p>{like.foodTypes[0].name}</p>
+              </div>
+              <div className="tables__info">
+                <p>{like.phone}</p>
+              </div>
+              <div className="tables__info">
+                <p>{like.zone_street}</p>
+              </div>
+              <div className="tables__info">
+                <p>{like.zone_street}</p>
+              </div>
+            </div>
+          </>
+        ))
       )}
     </>
   );
