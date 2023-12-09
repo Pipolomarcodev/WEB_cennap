@@ -69,7 +69,7 @@ const Home = ({ page }) => {
 
   const fetchRestaurants = () => {
     const backendPage = currentPage - 1;
-    const url = `http://localhost:8080/v1/api/restaurants/pages?page=${backendPage}&size=10&sort=name,asc`;
+    const url = `http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/restaurants/pages?page=${backendPage}&size=10&sort=name,asc`;
 
     setLoading(true);
 

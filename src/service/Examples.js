@@ -1,6 +1,6 @@
 
 
-const BASE_URL = '';
+const BASE_URL = 'http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/restaurants';
 
 export const findAll = async() => {
     try {
