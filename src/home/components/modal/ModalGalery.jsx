@@ -12,17 +12,14 @@ const ModalGallery = () => {
 
   const galleryImages = [
     {
-      original:
-        "/public/Carbonada/Captura de pantalla de 2023-12-07 19-17-44.png",
+      original: images.cafe,
     },
     {
-      original:
-        "../../../../public/Carbonada/Captura de pantalla de 2023-12-07 19-18-50.png",
+      original: images.platosComida,
     },
     ,
     {
-      original:
-        "../../../../public/tandory/Captura de pantalla de 2023-12-07 18-51-29.png",
+      original: images.platosComida,
     },
   ];
 
@@ -46,28 +43,13 @@ const ModalGallery = () => {
         />
       </div>
       <div>
-        <img
-          src={
-            "../../.../../../../public/Carbonada/Captura de pantalla de 2023-12-07 19-17-11.png"
-          }
-          alt="img2"
-        />
+        <img src={images.platosComida} alt="img2" />
       </div>
       <div>
-        <img
-          src={
-            "../../../../public/Negroni/Captura de pantalla de 2023-12-07 19-00-00.png"
-          }
-          alt="img3"
-        />
+        <img src={images.platosComida} alt="img3" />
       </div>
       <div>
-        <img
-          src={
-            "../../../../public/tandory/Captura de pantalla de 2023-12-07 18-51-29.png"
-          }
-          alt="img4"
-        />
+        <img src={images.platosComida} alt="img4" />
       </div>
       <div>
         <img src={images.platosComida} alt="img5" />

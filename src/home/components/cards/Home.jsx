@@ -21,7 +21,7 @@ const Home = ({ page }) => {
 
   const imagesModal = [
     {
-      img: "../../../../public/Alquimista/Captura de pantalla de 2023-12-07 18-54-56.png",
+      img: images.cafe,
     },
     {
       img: images.cafe,
@@ -30,10 +30,10 @@ const Home = ({ page }) => {
       img: images.logoElTioBistro,
     },
     {
-      img: "../../../../public/La Chingada/Captura de pantalla de 2023-12-07 19-06-12.png",
+      img: images.cafe,
     },
     {
-      img: "../../../../public/tandory/Captura de pantalla de 2023-12-07 18-51-09.png",
+      img: images.cafe,
     },
   ];
 
