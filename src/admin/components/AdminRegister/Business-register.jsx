@@ -8,6 +8,7 @@ import "../../../assets/bulma.css";
 import "./Admin.css";
 import { useAuth } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import BaseUrl from "../../../constants/BaseUrl";
 
 const BusinessRegister = () => {
   const [isSectionAVisible, setIsSectionAVisible] = useState(true);
@@ -20,8 +21,8 @@ const BusinessRegister = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [scheduleError, setscheduleError] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const { login,user } = useAuth();
-const [loading, setLoading] = useState(false);
+  const { login, user } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const openModal = () => {
     setModalVisible(true);
@@ -32,12 +33,12 @@ const [loading, setLoading] = useState(false);
   };
 
   const irAdmin = () => {
-   
+
     navigate("/home/:page");
   }; // la redirecion a a admin
 
   useEffect(() => {
-    fetch("http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/countries")
+    fetch(`${BaseUrl}/v1/api/countries`)
       .then((response) => response.json())
       .then((data) => {
         setCountries(data);
@@ -65,7 +66,7 @@ const [loading, setLoading] = useState(false);
     "Mejicana",
     "Mariscos",
     "Cafe",
-    "Turca", 
+    "Turca",
     "Española",
   ]
 
@@ -75,7 +76,7 @@ const [loading, setLoading] = useState(false);
     setIsBodyStyled(false);
   };
 
-  const showSectionB = () => {};
+  const showSectionB = () => { };
 
   const goBack = () => {
     setIsSectionAVisible(true);
@@ -83,7 +84,7 @@ const [loading, setLoading] = useState(false);
     setIsBodyStyled(false);
   };
 
-const userTerms = `TÉRMINOS Y CONDICIONES DE USUARUIOS CENAPP
+  const userTerms = `TÉRMINOS Y CONDICIONES DE USUARUIOS CENAPP
 
 Fecha de vigencia: [29/11/2023]
 
@@ -109,7 +110,7 @@ Responsabilidad y Limitación de Responsabilidad:
 4.2 Usted comprende y acepta que la aplicación no será responsable por daños directos, indirectos, incidentales, especiales, emergentes o ejemplares.
 `
 
-const adminTerms = `TÉRMINOS Y CONDICIONES PARA DUEÑOS DE RESTAURANTES EN CENAPP
+  const adminTerms = `TÉRMINOS Y CONDICIONES PARA DUEÑOS DE RESTAURANTES EN CENAPP
 
 Fecha de vigencia: [29/11/2023]
 
@@ -140,7 +141,7 @@ Responsabilidad y Limitación de Responsabilidad:
 `
 
 
-    
+
   const categories = ["Wifi", "Musica en vivo", "Terraza", "Estacionamiento", "Eventos"];
 
   /*"category_restaurant": {
@@ -151,33 +152,33 @@ Responsabilidad y Limitación de Responsabilidad:
         "wifi": true
     },*/
 
-    const horas = [
-      "00:00",
-      "01:00",
-      "02:00",
-      "03:00",
-      "04:00",
-      "05:00",
-      "06:00",
-      "07:00",
-      "08:00",
-      "09:00",
-      "10:00",
-      "11:00",
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "16:00",
-      "17:00",
-      "18:00",
-      "19:00",
-      "20:00",
-      "21:00",
-      "22:00",
-      "23:00",
-    ];
-  
+  const horas = [
+    "00:00",
+    "01:00",
+    "02:00",
+    "03:00",
+    "04:00",
+    "05:00",
+    "06:00",
+    "07:00",
+    "08:00",
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+    "18:00",
+    "19:00",
+    "20:00",
+    "21:00",
+    "22:00",
+    "23:00",
+  ];
+
 
   const validateSchedule = (weekSchedule) => {
     const enabledDays = Object.entries(weekSchedule).filter(
@@ -204,7 +205,7 @@ Responsabilidad y Limitación de Responsabilidad:
   const isEmailAvailable = async (email) => {
     try {
       const response = await fetch(
-        `http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/check-email/${email}`
+        `${BaseUrl}/auth/check-email/${email}`
       );
 
       if (response.status === 200) {
@@ -237,7 +238,7 @@ Responsabilidad y Limitación de Responsabilidad:
     const foodStyles = formikRest.values.foodStyles;
     const foodTypesArray = foodStyles.map((foodStyle) => ({
       name: foodStyle,
-      image: `imagen_${foodStyle}.jpg`, 
+      image: `imagen_${foodStyle}.jpg`,
     }));
     return foodTypesArray;
   };
@@ -259,40 +260,40 @@ Responsabilidad y Limitación de Responsabilidad:
     'Interior Fiesta 12p',
     'Exterior Fiesta 12p'
   ];
-  
-const mapTablesToSend = (tables) => {
-  tables = formikRest.values.tables;
-  return tables.map(({ quantity, type }) => {
-    const match = type.match(/(\D+)(\d*)p/); 
-    const tableType = match ? match[1] : '';
-    const tableCapacity = match ? parseInt(match[2], 10) : 0;
 
-    return {
-      cuantity_table: parseInt(quantity, 10),
-      table_capacity: tableCapacity,
-      table_type: tableType,
-    };
-  });
-};
+  const mapTablesToSend = (tables) => {
+    tables = formikRest.values.tables;
+    return tables.map(({ quantity, type }) => {
+      const match = type.match(/(\D+)(\d*)p/);
+      const tableType = match ? match[1] : '';
+      const tableCapacity = match ? parseInt(match[2], 10) : 0;
+
+      return {
+        cuantity_table: parseInt(quantity, 10),
+        table_capacity: tableCapacity,
+        table_type: tableType,
+      };
+    });
+  };
 
 
 
   const getId = (wich) => {
     let id;
-      if(wich == "country"){
-        countries.map((country)=>{
-            if(formik.values.pais == country.name){
-              id = country.id_country
-            }
-        })
-      }else{
-        cities.map((city)=> {
-            if(formikRest.values.city == city.name){
-              id = city.id_city
-            }
-        })
-      }
-      return id;
+    if (wich == "country") {
+      countries.map((country) => {
+        if (formik.values.pais == country.name) {
+          id = country.id_country
+        }
+      })
+    } else {
+      cities.map((city) => {
+        if (formikRest.values.city == city.name) {
+          id = city.id_city
+        }
+      })
+    }
+    return id;
   }
 
 
@@ -306,7 +307,7 @@ const mapTablesToSend = (tables) => {
       .test(
         "is-email-available",
         "Este correo electrónico ya está en uso.",
-        async function (value) {
+        async function(value) {
           if (this.parent) {
             // Llamar a la función isEmailAvailable solo al enviar el formulario
             const isAvailable = await isEmailAvailable(value);
@@ -340,7 +341,7 @@ const mapTablesToSend = (tables) => {
       .oneOf([yup.ref("password"), null], "Las contraseñas deben coincidir")
       .required("La confirmación de la contraseña es requerida"),
   });
-  
+
 
   const onSubmit = async (values) => {
     try {
@@ -358,23 +359,23 @@ const mapTablesToSend = (tables) => {
 
       let country_id;
 
-        countries.map((country) => {
-          if(country.name == formik.values.pais){
-            country_id = country.id_country;
-          }
+      countries.map((country) => {
+        if (country.name == formik.values.pais) {
+          country_id = country.id_country;
+        }
+      })
+
+      console.log(country_id);
+
+      fetch(`${BaseUrl}/v1/api/countries/${country_id}/cities`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setCities(data)
         })
-
-        console.log(country_id);
-
-      fetch(`http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/countries/${country_id}/cities`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setCities(data)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+        .catch((error) => {
+          console.error(error)
+        })
 
 
       setIsSectionAVisible(false);
@@ -401,7 +402,7 @@ const mapTablesToSend = (tables) => {
       email: formik.values.correElectronico,
       password: formik.values.password,
       roles: "ROLE_ADMIN",
-      id_city:1,
+      id_city: 1,
       id_country: getId("country")
     };
 
@@ -468,7 +469,7 @@ const mapTablesToSend = (tables) => {
         terrace: isCategorySelected("Terraza"),
         events: isCategorySelected("Eventos"),
         wifi: isCategorySelected("Wifi"),
-    },
+      },
       active: true,
       area: "10 m2",
       average_score: obtenerNumeroEnteroEntre1y5(),
@@ -482,8 +483,8 @@ const mapTablesToSend = (tables) => {
       city_id: getId("city"),
       restaurant_tables: mapTablesToSend(),
       logo: formik.values.fileSelect,
-      images:formikRest.values.images
-  }
+      images: formikRest.values.images
+    }
     console.log(formikRest.values.tables);
     console.log(adminData);
     console.log(restData);
@@ -500,7 +501,7 @@ const mapTablesToSend = (tables) => {
     if (scheduleError) {
       console.log(weekSchedule);
       console.log("Invalido");
-      actions.setSubmitting(false); 
+      actions.setSubmitting(false);
       return;
     }
 
@@ -510,7 +511,7 @@ const mapTablesToSend = (tables) => {
       email: formik.values.correElectronico,
       password: formik.values.password,
       roles: "ROLE_ADMIN",
-      id_city:1,
+      id_city: 1,
       id_country: getId("country")
     };
 
@@ -577,7 +578,7 @@ const mapTablesToSend = (tables) => {
         terrace: isCategorySelected("Terraza"),
         events: isCategorySelected("Eventos"),
         wifi: isCategorySelected("Wifi"),
-    },
+      },
       active: true,
       area: "10 m2",
       average_score: obtenerNumeroEnteroEntre1y5(),
@@ -591,11 +592,11 @@ const mapTablesToSend = (tables) => {
       city_id: getId("city"),
       restaurant_tables: mapTablesToSend(),
 
-  }
+    }
 
     try {
       const adminResponse = await fetch(
-        "http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/addNewUser",
+        `${BaseUrl}/auth/addNewUser`,
         {
           method: "POST",
           headers: {
@@ -613,7 +614,7 @@ const mapTablesToSend = (tables) => {
 
       // Step 2: Generate token
       const tokenResponse = await fetch(
-        "http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/generateToken",
+        `${BaseUrl}/auth/generateToken`,
         {
           method: "POST",
           headers: {
@@ -635,14 +636,14 @@ const mapTablesToSend = (tables) => {
       console.log("Token Response:", token);
 
       // Step 3: Create restaurant
-      
+
       const restaurantResponse = await fetch(
-        "http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/restaurants/create",
+        `${BaseUrl}/v1/api/restaurants/create`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`, 
+            "Authorization": `Bearer ${token}`,
           },
           body: JSON.stringify(restData),
         }
@@ -653,9 +654,9 @@ const mapTablesToSend = (tables) => {
           `Network response was not ok on create rest: ${restaurantResponse.statusText}`
         );
       }
-    
-      
-    login(token);
+
+
+      login(token);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -664,7 +665,7 @@ const mapTablesToSend = (tables) => {
   const formik = useFormik({
     initialValues: {
       nombreTitular: "",
-      apellidoTitular:"",
+      apellidoTitular: "",
       correElectronico: "",
       tel: "",
       pais: "",
@@ -760,7 +761,7 @@ const mapTablesToSend = (tables) => {
     zone: yup
       .string("Por favor ingrese una zona o barrio válido.")
       .required("Campo obligatorio"),
-      city: yup
+    city: yup
       .string()
       .required("Campo obligatorio")
       .notOneOf(["Ciudad*"], "Campo obligatorio."),
@@ -934,12 +935,11 @@ const mapTablesToSend = (tables) => {
                 <div className="first-column-inputs">
                   <div>
                     <input
-                      className={`input ${
-                        formik.errors.nombreTitular &&
+                      className={`input ${formik.errors.nombreTitular &&
                         formik.touched.nombreTitular
-                          ? "is-danger"
-                          : ""
-                      }`}
+                        ? "is-danger"
+                        : ""
+                        }`}
                       type="text"
                       id="nombreTitular"
                       placeholder="Nombre del titular*"
@@ -949,15 +949,14 @@ const mapTablesToSend = (tables) => {
                     ></input>
                     <span
                       id="error-a"
-                      className={`error-message ${
-                        formik.errors.nombreTitular &&
+                      className={`error-message ${formik.errors.nombreTitular &&
                         formik.touched.nombreTitular
-                          ? "visible"
-                          : ""
-                      }`}
+                        ? "visible"
+                        : ""
+                        }`}
                     >
                       {formik.errors.nombreTitular &&
-                      formik.touched.nombreTitular
+                        formik.touched.nombreTitular
                         ? formik.errors.nombreTitular
                         : ""}
                     </span>
@@ -965,12 +964,11 @@ const mapTablesToSend = (tables) => {
                   <div>
                     <input
                       id="correElectronico"
-                      class={`input ${
-                        formik.errors.correElectronico &&
+                      class={`input ${formik.errors.correElectronico &&
                         formik.touched.correElectronico
-                          ? "is-danger"
-                          : ""
-                      }`}
+                        ? "is-danger"
+                        : ""
+                        }`}
                       type="text"
                       placeholder="Correo electrónico*"
                       value={formik.values.correElectronico}
@@ -979,15 +977,14 @@ const mapTablesToSend = (tables) => {
                     ></input>
                     <span
                       id="error-a"
-                      className={`error-message ${
-                        formik.errors.correElectronico &&
+                      className={`error-message ${formik.errors.correElectronico &&
                         formik.touched.correElectronico
-                          ? "visible"
-                          : ""
-                      }`}
+                        ? "visible"
+                        : ""
+                        }`}
                     >
                       {formik.errors.correElectronico &&
-                      formik.touched.correElectronico
+                        formik.touched.correElectronico
                         ? formik.errors.correElectronico
                         : ""}
                     </span>
@@ -995,11 +992,10 @@ const mapTablesToSend = (tables) => {
                   <div>
                     <input
                       id="tel"
-                      class={`input ${
-                        formik.errors.tel && formik.touched.tel
-                          ? "is-danger"
-                          : ""
-                      }`}
+                      class={`input ${formik.errors.tel && formik.touched.tel
+                        ? "is-danger"
+                        : ""
+                        }`}
                       type="number"
                       placeholder="Numero de telefono*"
                       value={formik.values.tel}
@@ -1008,11 +1004,10 @@ const mapTablesToSend = (tables) => {
                     ></input>
                     <span
                       id="error-a"
-                      className={`error-message ${
-                        formik.errors.tel && formik.touched.tel
-                          ? "visible"
-                          : ""
-                      }`}
+                      className={`error-message ${formik.errors.tel && formik.touched.tel
+                        ? "visible"
+                        : ""
+                        }`}
                     >
                       {formik.errors.tel && formik.touched.tel
                         ? formik.errors.tel
@@ -1023,11 +1018,10 @@ const mapTablesToSend = (tables) => {
                   <div>
                     <input
                       id="password"
-                      className={`input ${
-                        formik.errors.password && formik.touched.password
-                          ? "is-danger"
-                          : ""
-                      }`}
+                      className={`input ${formik.errors.password && formik.touched.password
+                        ? "is-danger"
+                        : ""
+                        }`}
                       type="password"
                       placeholder="Contraseña"
                       value={formik.values.password}
@@ -1036,11 +1030,10 @@ const mapTablesToSend = (tables) => {
                     ></input>
                     <span
                       id="error-a"
-                      className={`error-message ${
-                        formik.errors.password && formik.touched.password
-                          ? "visible"
-                          : ""
-                      }`}
+                      className={`error-message ${formik.errors.password && formik.touched.password
+                        ? "visible"
+                        : ""
+                        }`}
                     >
                       {formik.errors.password && formik.touched.password
                         ? formik.errors.password
@@ -1053,11 +1046,10 @@ const mapTablesToSend = (tables) => {
                   <div>
                     <input
                       id="apellidoTitular"
-                      className={`input  ${
-                        formik.errors.apellidoTitular && formik.touched.apellidoTitular
-                          ? "is-danger"
-                          : ""
-                      }`}
+                      className={`input  ${formik.errors.apellidoTitular && formik.touched.apellidoTitular
+                        ? "is-danger"
+                        : ""
+                        }`}
                       type="text"
                       placeholder="Apellido del titular*"
                       value={formik.values.apellidoTitular}
@@ -1066,11 +1058,10 @@ const mapTablesToSend = (tables) => {
                     ></input>
                     <span
                       id="error-a"
-                      className={`error-message ${
-                        formik.errors.apellidoTitular && formik.touched.apellidoTitular
-                          ? "visible"
-                          : ""
-                      }`}
+                      className={`error-message ${formik.errors.apellidoTitular && formik.touched.apellidoTitular
+                        ? "visible"
+                        : ""
+                        }`}
                     >
                       {formik.errors.apellidoTitular && formik.touched.apellidoTitular
                         ? formik.errors.apellidoTitular
@@ -1080,18 +1071,16 @@ const mapTablesToSend = (tables) => {
 
                   <div>
                     <div
-                      className={`select select-div-A  is-rounded ${
-                        formik.errors.pais && formik.touched.pais
-                          ? " is-dark"
-                          : "is-dark"
-                      }`}
+                      className={`select select-div-A  is-rounded ${formik.errors.pais && formik.touched.pais
+                        ? " is-dark"
+                        : "is-dark"
+                        }`}
                     >
                       <select
-                        className={`country-select select-A  ${
-                          formik.errors.pais && formik.touched.pais
-                            ? "is-danger country-error"
-                            : ""
-                        }`}
+                        className={`country-select select-A  ${formik.errors.pais && formik.touched.pais
+                          ? "is-danger country-error"
+                          : ""
+                          }`}
                         onChange={formik.handleChange}
                         id="pais"
                       >
@@ -1103,11 +1092,10 @@ const mapTablesToSend = (tables) => {
                     </div>
                     <span
                       id="error-a"
-                      className={`error-message p ${
-                        formik.errors.pais && formik.touched.pais
-                          ? "visible"
-                          : ""
-                      }`}
+                      className={`error-message p ${formik.errors.pais && formik.touched.pais
+                        ? "visible"
+                        : ""
+                        }`}
                     >
                       {formik.errors.pais && formik.touched.pais
                         ? formik.errors.pais
@@ -1140,11 +1128,10 @@ const mapTablesToSend = (tables) => {
 
                     <span
                       id="error-a"
-                      className={`error-message f ${
-                        formik.errors.fileSelect && formik.touched.fileSelect
-                          ? "visible"
-                          : ""
-                      }`}
+                      className={`error-message f ${formik.errors.fileSelect && formik.touched.fileSelect
+                        ? "visible"
+                        : ""
+                        }`}
                     >
                       {formik.errors.fileSelect && formik.touched.fileSelect
                         ? formik.errors.fileSelect
@@ -1155,12 +1142,11 @@ const mapTablesToSend = (tables) => {
                   <div>
                     <input
                       id="confirmPassword"
-                      className={`input ${
-                        formik.errors.confirmPassword &&
+                      className={`input ${formik.errors.confirmPassword &&
                         formik.touched.confirmPassword
-                          ? "is-danger"
-                          : ""
-                      }`}
+                        ? "is-danger"
+                        : ""
+                        }`}
                       type="password"
                       placeholder="Repetir contraseña"
                       value={formik.values.confirmPassword}
@@ -1169,15 +1155,14 @@ const mapTablesToSend = (tables) => {
                     ></input>
                     <span
                       id="error-a"
-                      className={`error-message ${
-                        formik.errors.confirmPassword &&
+                      className={`error-message ${formik.errors.confirmPassword &&
                         formik.touched.confirmPassword
-                          ? "visible"
-                          : ""
-                      }`}
+                        ? "visible"
+                        : ""
+                        }`}
                     >
                       {formik.errors.confirmPassword &&
-                      formik.touched.confirmPassword
+                        formik.touched.confirmPassword
                         ? formik.errors.confirmPassword
                         : ""}
                     </span>
@@ -1220,11 +1205,10 @@ const mapTablesToSend = (tables) => {
               <div className="second-line flex-line">
                 <div className="div-input">
                   <input
-                    className={`input input-style second-line-input ${
-                      formikRest.errors.restName && formikRest.touched.restName
-                        ? "is-danger"
-                        : ""
-                    }`}
+                    className={`input input-style second-line-input ${formikRest.errors.restName && formikRest.touched.restName
+                      ? "is-danger"
+                      : ""
+                      }`}
                     type="text"
                     placeholder="Nombre del Restaurante*"
                     id="restName"
@@ -1234,11 +1218,10 @@ const mapTablesToSend = (tables) => {
                   />
                   <span
                     id="error-b"
-                    className={`error-message-b ${
-                      formikRest.errors.restName && formikRest.touched.restName
-                        ? "visible-b"
-                        : "invisible-b"
-                    }`}
+                    className={`error-message-b ${formikRest.errors.restName && formikRest.touched.restName
+                      ? "visible-b"
+                      : "invisible-b"
+                      }`}
                   >
                     {formikRest.errors.restName && formikRest.touched.restName
                       ? formikRest.errors.restName
@@ -1251,12 +1234,11 @@ const mapTablesToSend = (tables) => {
                     <div className="dropdown-trigger">
                       <button
                         id="foodStyles"
-                        className={`button input-style drop-hover second-line-button ${
-                          formikRest.errors.foodStyles &&
+                        className={`button input-style drop-hover second-line-button ${formikRest.errors.foodStyles &&
                           formikRest.touched.foodStyles
-                            ? "drop-error"
-                            : ""
-                        }`}
+                          ? "drop-error"
+                          : ""
+                          }`}
                         aria-haspopup="true"
                         aria-controls="dropdown-menu"
                       >
@@ -1273,11 +1255,10 @@ const mapTablesToSend = (tables) => {
                         {food_styles.map((style, index) => (
                           <a
                             href="#"
-                            className={`dropdown-item ${
-                              formikRest.values.foodStyles.includes(style)
-                                ? "is-active"
-                                : ""
-                            }`}
+                            className={`dropdown-item ${formikRest.values.foodStyles.includes(style)
+                              ? "is-active"
+                              : ""
+                              }`}
                             key={index}
                             onClick={() => handleItemClick(style, "food")}
                           >
@@ -1289,15 +1270,14 @@ const mapTablesToSend = (tables) => {
                   </div>
 
                   <span
-                    className={`error-message-b${
-                      formikRest.errors.foodStyles &&
+                    className={`error-message-b${formikRest.errors.foodStyles &&
                       formikRest.touched.foodStyles
-                        ? " visible-b"
-                        : " invisible-b"
-                    }`}
+                      ? " visible-b"
+                      : " invisible-b"
+                      }`}
                   >
                     {formikRest.errors.foodStyles &&
-                    formikRest.touched.foodStyles
+                      formikRest.touched.foodStyles
                       ? formikRest.errors.foodStyles
                       : "none"}
                   </span>
@@ -1307,12 +1287,11 @@ const mapTablesToSend = (tables) => {
                   <div className="dropdown is-hoverable">
                     <div className="dropdown-trigger">
                       <button
-                        className={`button input-style drop-hover second-line-button ${
-                          formikRest.errors.categories &&
+                        className={`button input-style drop-hover second-line-button ${formikRest.errors.categories &&
                           formikRest.touched.categories
-                            ? "drop-error"
-                            : ""
-                        }`}
+                          ? "drop-error"
+                          : ""
+                          }`}
                         aria-haspopup="true"
                         aria-controls="dropdown-menu5"
                       >
@@ -1329,11 +1308,10 @@ const mapTablesToSend = (tables) => {
                         {categories.map((category, index) => (
                           <a
                             href="#"
-                            className={`dropdown-item ${
-                              formikRest.values.categories.includes(category)
-                                ? "is-active"
-                                : ""
-                            }`}
+                            className={`dropdown-item ${formikRest.values.categories.includes(category)
+                              ? "is-active"
+                              : ""
+                              }`}
                             key={index}
                             onClick={() =>
                               handleItemClick(category, "category")
@@ -1346,15 +1324,14 @@ const mapTablesToSend = (tables) => {
                     </div>
                   </div>
                   <span
-                    className={`error-message-b${
-                      formikRest.errors.categories &&
+                    className={`error-message-b${formikRest.errors.categories &&
                       formikRest.touched.categories
-                        ? " visible-b"
-                        : " invisible-b"
-                    }`}
+                      ? " visible-b"
+                      : " invisible-b"
+                      }`}
                   >
                     {formikRest.errors.categories &&
-                    formikRest.touched.categories
+                      formikRest.touched.categories
                       ? formikRest.errors.categories
                       : "none"}
                   </span>
@@ -1363,11 +1340,10 @@ const mapTablesToSend = (tables) => {
               <div className="third-line flex-line">
                 <div className="div-input">
                   <input
-                    className={`input input-style input-t ${
-                      formikRest.errors.address && formikRest.touched.address
-                        ? "is-danger"
-                        : ""
-                    }`}
+                    className={`input input-style input-t ${formikRest.errors.address && formikRest.touched.address
+                      ? "is-danger"
+                      : ""
+                      }`}
                     type="text"
                     placeholder="Dirección*"
                     id="address"
@@ -1377,11 +1353,10 @@ const mapTablesToSend = (tables) => {
                   />
                   <span
                     id="error-b"
-                    className={`error-message-b ${
-                      formikRest.errors.address && formikRest.touched.address
-                        ? "visible-b"
-                        : "invisible-b"
-                    }`}
+                    className={`error-message-b ${formikRest.errors.address && formikRest.touched.address
+                      ? "visible-b"
+                      : "invisible-b"
+                      }`}
                   >
                     {formikRest.errors.address && formikRest.touched.address
                       ? formikRest.errors.address
@@ -1391,11 +1366,10 @@ const mapTablesToSend = (tables) => {
 
                 <div className="">
                   <input
-                    className={`input input-style input-t-two ${
-                      formikRest.errors.zone && formikRest.touched.zone
-                        ? "is-danger"
-                        : ""
-                    }`}
+                    className={`input input-style input-t-two ${formikRest.errors.zone && formikRest.touched.zone
+                      ? "is-danger"
+                      : ""
+                      }`}
                     type="text"
                     placeholder="Ciudad"
                     id="zone"
@@ -1405,11 +1379,10 @@ const mapTablesToSend = (tables) => {
                   />
                   <span
                     id="error-b"
-                    className={`error-message-b ${
-                      formikRest.errors.zone && formikRest.touched.zone
-                        ? "visible-b"
-                        : "invisible-b"
-                    }`}
+                    className={`error-message-b ${formikRest.errors.zone && formikRest.touched.zone
+                      ? "visible-b"
+                      : "invisible-b"
+                      }`}
                   >
                     {formikRest.errors.zone && formikRest.touched.zone
                       ? formikRest.errors.zone
@@ -1418,42 +1391,39 @@ const mapTablesToSend = (tables) => {
                 </div>
 
                 <div>
-                    <div
-                      className={`select input-t-two input-style city ${
-                        formikRest.errors.city && formikRest.touched.city
-                          ? " is-dark"
-                          : "is-dark"
+                  <div
+                    className={`select input-t-two input-style city ${formikRest.errors.city && formikRest.touched.city
+                      ? " is-dark"
+                      : "is-dark"
                       }`}
-                      id="ciudad-div"
-                    >
-                      <select
-                        className={` select-A city ${
-                          formikRest.errors.city && formikRest.touched.city
-                            ? "is-danger country-error"
-                            : ""
+                    id="ciudad-div"
+                  >
+                    <select
+                      className={` select-A city ${formikRest.errors.city && formikRest.touched.city
+                        ? "is-danger country-error"
+                        : ""
                         }`}
-                        onChange={formikRest.handleChange}
-                        id="city"
-                      >
-                        <option>Provincia/Depart.*</option>
-                        {cities.map((city, index) => (
-                          <option key={index}>{city.name}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <span
-                      id="error-a"
-                      className={`error-message p ${
-                        formikRest.errors.city && formikRest.touched.city
-                          ? "visible"
-                          : ""
-                      }`}
+                      onChange={formikRest.handleChange}
+                      id="city"
                     >
-                      {formikRest.errors.city && formikRest.touched.city
-                        ? formikRest.errors.city
-                        : ""}
-                    </span>
+                      <option>Provincia/Depart.*</option>
+                      {cities.map((city, index) => (
+                        <option key={index}>{city.name}</option>
+                      ))}
+                    </select>
                   </div>
+                  <span
+                    id="error-a"
+                    className={`error-message p ${formikRest.errors.city && formikRest.touched.city
+                      ? "visible"
+                      : ""
+                      }`}
+                  >
+                    {formikRest.errors.city && formikRest.touched.city
+                      ? formikRest.errors.city
+                      : ""}
+                  </span>
+                </div>
               </div>
 
               <div className="fourth-line flex-line">
@@ -1463,25 +1433,23 @@ const mapTablesToSend = (tables) => {
                     value={formikRest.values.description}
                     onChange={formikRest.handleChange}
                     onBlur={formikRest.handleBlur}
-                    className={`text-area input-style ${
-                      formikRest.errors.description &&
+                    className={`text-area input-style ${formikRest.errors.description &&
                       formikRest.touched.description
-                        ? "is-danger-text"
-                        : ""
-                    }`}
+                      ? "is-danger-text"
+                      : ""
+                      }`}
                     placeholder="Descripción (Máx. 500 caracteres.)"
                   ></textarea>
                   <span
                     id="error-b"
-                    className={`error-message-b  area-error ${
-                      formikRest.errors.description &&
+                    className={`error-message-b  area-error ${formikRest.errors.description &&
                       formikRest.touched.description
-                        ? "visible-b"
-                        : "invisible-b"
-                    }`}
+                      ? "visible-b"
+                      : "invisible-b"
+                      }`}
                   >
                     {formikRest.errors.description &&
-                    formikRest.touched.description
+                      formikRest.touched.description
                       ? formikRest.errors.description
                       : "none"}
                   </span>
@@ -1489,11 +1457,10 @@ const mapTablesToSend = (tables) => {
 
                 <div className="price-div">
                   <input
-                    className={`input input-style ${
-                      formikRest.errors.priceAvg && formikRest.touched.priceAvg
-                        ? "is-danger"
-                        : ""
-                    }`}
+                    className={`input input-style ${formikRest.errors.priceAvg && formikRest.touched.priceAvg
+                      ? "is-danger"
+                      : ""
+                      }`}
                     type="number"
                     placeholder="Precio promedio*"
                     id="priceAvg"
@@ -1503,11 +1470,10 @@ const mapTablesToSend = (tables) => {
                   />
                   <span
                     id="error-b"
-                    className={`error-message-b ${
-                      formikRest.errors.priceAvg && formikRest.touched.priceAvg
-                        ? "visible-b"
-                        : "invisible-b"
-                    }`}
+                    className={`error-message-b ${formikRest.errors.priceAvg && formikRest.touched.priceAvg
+                      ? "visible-b"
+                      : "invisible-b"
+                      }`}
                   >
                     {formikRest.errors.priceAvg && formikRest.touched.priceAvg
                       ? formikRest.errors.priceAvg
@@ -1625,11 +1591,10 @@ const mapTablesToSend = (tables) => {
                       onClick={() => toggleDay(day)}
                     />
                     <div
-                      className={`select is-dark select-container day-select ${
-                        weekSchedule[day].habilitado
-                          ? ""
-                          : "is-disabled disabled"
-                      }`}
+                      className={`select is-dark select-container day-select ${weekSchedule[day].habilitado
+                        ? ""
+                        : "is-disabled disabled"
+                        }`}
                     >
                       <select
                         className="select-table"
@@ -1644,11 +1609,10 @@ const mapTablesToSend = (tables) => {
                     </div>
                     <br />
                     <div
-                      className={`select is-dark select-container day-select ${
-                        weekSchedule[day].habilitado
-                          ? ""
-                          : "is-disabled disabled"
-                      }`}
+                      className={`select is-dark select-container day-select ${weekSchedule[day].habilitado
+                        ? ""
+                        : "is-disabled disabled"
+                        }`}
                     >
                       <select
                         className="select-table"
@@ -1679,16 +1643,15 @@ const mapTablesToSend = (tables) => {
                   <h4 className="next-text hover">volver</h4>
                 </div>
                 <button
-  className={`custom-button${
-    formikRest.values.terms ? "" : " disabled"
-  }${formikRest.isSubmitting ? " is-loading" : ""}`}
-  type="submit"
-  onClick={formikRest.handleSubmit}
-  // Cambio hecho para redirigir a admin
-  disabled={!formikRest.values.terms}
->
-  Registrar Restaurante
-</button>
+                  className={`custom-button${formikRest.values.terms ? "" : " disabled"
+                    }${formikRest.isSubmitting ? " is-loading" : ""}`}
+                  type="submit"
+                  onClick={formikRest.handleSubmit}
+                  // Cambio hecho para redirigir a admin
+                  disabled={!formikRest.values.terms}
+                >
+                  Registrar Restaurante
+                </button>
                 <div>
                   <label className="terms checkbox">
                     <input
@@ -1696,11 +1659,10 @@ const mapTablesToSend = (tables) => {
                       onChange={formikRest.handleChange}
                       type="checkbox"
                       id="terms"
-                      className={`ckeck-box${
-                        formikRest.errors.terms && formikRest.touched.terms
-                          ? "red"
-                          : ""
-                      }`}
+                      className={`ckeck-box${formikRest.errors.terms && formikRest.touched.terms
+                        ? "red"
+                        : ""
+                        }`}
                     />
                   </label>
 

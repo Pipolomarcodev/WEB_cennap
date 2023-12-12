@@ -1,9 +1,9 @@
-const BASE_URL = "http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080";
+import BaseUrl from "../constants/BaseUrl";
 
 const userUsers = {
   login: async (credentials) => {
     try {
-      const response = await fetch(`${BASE_URL}/auth/generateToken`, {
+      const response = await fetch(`${BaseUrl}/auth/generateToken`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

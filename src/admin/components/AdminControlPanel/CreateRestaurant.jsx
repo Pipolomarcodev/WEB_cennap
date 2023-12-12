@@ -9,7 +9,7 @@ import { images } from "../../../constants";
 const CreateRestaurant = ({ closeModal }) => {
   const [dynamicElements, setDynamicElements] = useState([{}]);
   const [scheduleError, setscheduleError] = useState(false);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [cities, setCities] = useState([]);
   const [weekSchedule, setWeekSchedule] = useState({
     lunes: {
@@ -59,24 +59,24 @@ const CreateRestaurant = ({ closeModal }) => {
     */
 
 
-    fetch(`http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/countries/${country_id}/cities`)
-    .then((response) => response.json())
-    .then((data) => {
-      setLoading(true)
-      setCities(data)
-    })
-    .catch((error) => {
-      console.error(error)
-    }).finally(() => {
+    fetch(`/v1/api/countries/${country_id}/cities`)
+      .then((response) => response.json())
+      .then((data) => {
+        setLoading(true)
+        setCities(data)
+      })
+      .catch((error) => {
+        console.error(error)
+      }).finally(() => {
         setLoading(false);
-    })
+      })
 
 
 
-      
+
   }, []); // El array vacío asegura que se ejecute solo una vez
 
-  const onSubmitRest = () => {};
+  const onSubmitRest = () => { };
 
   const food_styles = [
     "Colombiana",
@@ -346,14 +346,14 @@ const CreateRestaurant = ({ closeModal }) => {
 
   if (loading) {
     return (
-        <>
-         <div className="modal-overlay-r">
-            <div className="loader-cont">
-                <img src={images.logoInsolate} alt="" className="loader-r"/>
-                </div>
-         </div>
-        
-        </>
+      <>
+        <div className="modal-overlay-r">
+          <div className="loader-cont">
+            <img src={images.logoInsolate} alt="" className="loader-r" />
+          </div>
+        </div>
+
+      </>
     );
   }
 
@@ -366,11 +366,10 @@ const CreateRestaurant = ({ closeModal }) => {
               <div className="second-line flex-line">
                 <div className="div-input">
                   <input
-                    className={`input input-style second-line-input ${
-                      formikRest.errors.restName && formikRest.touched.restName
+                    className={`input input-style second-line-input ${formikRest.errors.restName && formikRest.touched.restName
                         ? "is-danger"
                         : ""
-                    }`}
+                      }`}
                     type="text"
                     placeholder="Nombre del Restaurante*"
                     id="restName"
@@ -380,11 +379,10 @@ const CreateRestaurant = ({ closeModal }) => {
                   />
                   <span
                     id="error-b"
-                    className={`error-message-b ${
-                      formikRest.errors.restName && formikRest.touched.restName
+                    className={`error-message-b ${formikRest.errors.restName && formikRest.touched.restName
                         ? "visible-b"
                         : "invisible-b"
-                    }`}
+                      }`}
                   >
                     {formikRest.errors.restName && formikRest.touched.restName
                       ? formikRest.errors.restName
@@ -397,12 +395,11 @@ const CreateRestaurant = ({ closeModal }) => {
                     <div className="dropdown-trigger">
                       <button
                         id="foodStyles"
-                        className={`button input-style drop-hover second-line-button ${
-                          formikRest.errors.foodStyles &&
-                          formikRest.touched.foodStyles
+                        className={`button input-style drop-hover second-line-button ${formikRest.errors.foodStyles &&
+                            formikRest.touched.foodStyles
                             ? "drop-error"
                             : ""
-                        }`}
+                          }`}
                         aria-haspopup="true"
                         aria-controls="dropdown-menu"
                       >
@@ -419,11 +416,10 @@ const CreateRestaurant = ({ closeModal }) => {
                         {food_styles.map((style, index) => (
                           <a
                             href="#"
-                            className={`dropdown-item ${
-                              formikRest.values.foodStyles.includes(style)
+                            className={`dropdown-item ${formikRest.values.foodStyles.includes(style)
                                 ? "is-active"
                                 : ""
-                            }`}
+                              }`}
                             key={index}
                             onClick={() => handleItemClick(style, "food")}
                           >
@@ -435,15 +431,14 @@ const CreateRestaurant = ({ closeModal }) => {
                   </div>
 
                   <span
-                    className={`error-message-b${
-                      formikRest.errors.foodStyles &&
-                      formikRest.touched.foodStyles
+                    className={`error-message-b${formikRest.errors.foodStyles &&
+                        formikRest.touched.foodStyles
                         ? " visible-b"
                         : " invisible-b"
-                    }`}
+                      }`}
                   >
                     {formikRest.errors.foodStyles &&
-                    formikRest.touched.foodStyles
+                      formikRest.touched.foodStyles
                       ? formikRest.errors.foodStyles
                       : "none"}
                   </span>
@@ -453,12 +448,11 @@ const CreateRestaurant = ({ closeModal }) => {
                   <div className="dropdown is-hoverable">
                     <div className="dropdown-trigger">
                       <button
-                        className={`button input-style drop-hover second-line-button ${
-                          formikRest.errors.categories &&
-                          formikRest.touched.categories
+                        className={`button input-style drop-hover second-line-button ${formikRest.errors.categories &&
+                            formikRest.touched.categories
                             ? "drop-error"
                             : ""
-                        }`}
+                          }`}
                         aria-haspopup="true"
                         aria-controls="dropdown-menu5"
                       >
@@ -475,11 +469,10 @@ const CreateRestaurant = ({ closeModal }) => {
                         {categories.map((category, index) => (
                           <a
                             href="#"
-                            className={`dropdown-item ${
-                              formikRest.values.categories.includes(category)
+                            className={`dropdown-item ${formikRest.values.categories.includes(category)
                                 ? "is-active"
                                 : ""
-                            }`}
+                              }`}
                             key={index}
                             onClick={() =>
                               handleItemClick(category, "category")
@@ -492,15 +485,14 @@ const CreateRestaurant = ({ closeModal }) => {
                     </div>
                   </div>
                   <span
-                    className={`error-message-b${
-                      formikRest.errors.categories &&
-                      formikRest.touched.categories
+                    className={`error-message-b${formikRest.errors.categories &&
+                        formikRest.touched.categories
                         ? " visible-b"
                         : " invisible-b"
-                    }`}
+                      }`}
                   >
                     {formikRest.errors.categories &&
-                    formikRest.touched.categories
+                      formikRest.touched.categories
                       ? formikRest.errors.categories
                       : "none"}
                   </span>
@@ -509,11 +501,10 @@ const CreateRestaurant = ({ closeModal }) => {
               <div className="third-line flex-line">
                 <div className="div-input">
                   <input
-                    className={`input input-style input-t ${
-                      formikRest.errors.address && formikRest.touched.address
+                    className={`input input-style input-t ${formikRest.errors.address && formikRest.touched.address
                         ? "is-danger"
                         : ""
-                    }`}
+                      }`}
                     type="text"
                     placeholder="Dirección*"
                     id="address"
@@ -523,11 +514,10 @@ const CreateRestaurant = ({ closeModal }) => {
                   />
                   <span
                     id="error-b"
-                    className={`error-message-b ${
-                      formikRest.errors.address && formikRest.touched.address
+                    className={`error-message-b ${formikRest.errors.address && formikRest.touched.address
                         ? "visible-b"
                         : "invisible-b"
-                    }`}
+                      }`}
                   >
                     {formikRest.errors.address && formikRest.touched.address
                       ? formikRest.errors.address
@@ -537,11 +527,10 @@ const CreateRestaurant = ({ closeModal }) => {
 
                 <div className="">
                   <input
-                    className={`input input-style input-t-two ${
-                      formikRest.errors.zone && formikRest.touched.zone
+                    className={`input input-style input-t-two ${formikRest.errors.zone && formikRest.touched.zone
                         ? "is-danger"
                         : ""
-                    }`}
+                      }`}
                     type="text"
                     placeholder="Zona/Barrio"
                     id="zone"
@@ -551,11 +540,10 @@ const CreateRestaurant = ({ closeModal }) => {
                   />
                   <span
                     id="error-b"
-                    className={`error-message-b ${
-                      formikRest.errors.zone && formikRest.touched.zone
+                    className={`error-message-b ${formikRest.errors.zone && formikRest.touched.zone
                         ? "visible-b"
                         : "invisible-b"
-                    }`}
+                      }`}
                   >
                     {formikRest.errors.zone && formikRest.touched.zone
                       ? formikRest.errors.zone
@@ -564,42 +552,39 @@ const CreateRestaurant = ({ closeModal }) => {
                 </div>
 
                 <div>
-                    <div
-                      className={`select input-t-two input-style city ${
-                        formikRest.errors.city && formikRest.touched.city
-                          ? " is-dark"
-                          : "is-dark"
+                  <div
+                    className={`select input-t-two input-style city ${formikRest.errors.city && formikRest.touched.city
+                        ? " is-dark"
+                        : "is-dark"
                       }`}
-                      id="ciudad-div"
-                    >
-                      <select
-                        className={` select-A city ${
-                          formikRest.errors.city && formikRest.touched.city
-                            ? "is-danger country-error"
-                            : ""
-                        }`}
-                        onChange={formikRest.handleChange}
-                        id="city"
-                      >
-                        <option>Ciudad*</option>
-                        {cities.map((city, index) => (
-                          <option key={index}>{city.name}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <span
-                      id="error-a"
-                      className={`error-message p ${
-                        formikRest.errors.city && formikRest.touched.city
-                          ? "visible"
+                    id="ciudad-div"
+                  >
+                    <select
+                      className={` select-A city ${formikRest.errors.city && formikRest.touched.city
+                          ? "is-danger country-error"
                           : ""
-                      }`}
+                        }`}
+                      onChange={formikRest.handleChange}
+                      id="city"
                     >
-                      {formikRest.errors.city && formikRest.touched.city
-                        ? formikRest.errors.city
-                        : ""}
-                    </span>
+                      <option>Ciudad*</option>
+                      {cities.map((city, index) => (
+                        <option key={index}>{city.name}</option>
+                      ))}
+                    </select>
                   </div>
+                  <span
+                    id="error-a"
+                    className={`error-message p ${formikRest.errors.city && formikRest.touched.city
+                        ? "visible"
+                        : ""
+                      }`}
+                  >
+                    {formikRest.errors.city && formikRest.touched.city
+                      ? formikRest.errors.city
+                      : ""}
+                  </span>
+                </div>
               </div>
 
               <div className="fourth-line flex-line">
@@ -609,25 +594,23 @@ const CreateRestaurant = ({ closeModal }) => {
                     value={formikRest.values.description}
                     onChange={formikRest.handleChange}
                     onBlur={formikRest.handleBlur}
-                    className={`text-area input-style ${
-                      formikRest.errors.description &&
-                      formikRest.touched.description
+                    className={`text-area input-style ${formikRest.errors.description &&
+                        formikRest.touched.description
                         ? "is-danger-text"
                         : ""
-                    }`}
+                      }`}
                     placeholder="Descripción (Máx. 500 caracteres.)"
                   ></textarea>
                   <span
                     id="error-b"
-                    className={`error-message-b  area-error ${
-                      formikRest.errors.description &&
-                      formikRest.touched.description
+                    className={`error-message-b  area-error ${formikRest.errors.description &&
+                        formikRest.touched.description
                         ? "visible-b"
                         : "invisible-b"
-                    }`}
+                      }`}
                   >
                     {formikRest.errors.description &&
-                    formikRest.touched.description
+                      formikRest.touched.description
                       ? formikRest.errors.description
                       : "none"}
                   </span>
@@ -635,11 +618,10 @@ const CreateRestaurant = ({ closeModal }) => {
 
                 <div className="price-div">
                   <input
-                    className={`input input-style ${
-                      formikRest.errors.priceAvg && formikRest.touched.priceAvg
+                    className={`input input-style ${formikRest.errors.priceAvg && formikRest.touched.priceAvg
                         ? "is-danger"
                         : ""
-                    }`}
+                      }`}
                     type="number"
                     placeholder="Precio promedio*"
                     id="priceAvg"
@@ -649,11 +631,10 @@ const CreateRestaurant = ({ closeModal }) => {
                   />
                   <span
                     id="error-b"
-                    className={`error-message-b ${
-                      formikRest.errors.priceAvg && formikRest.touched.priceAvg
+                    className={`error-message-b ${formikRest.errors.priceAvg && formikRest.touched.priceAvg
                         ? "visible-b"
                         : "invisible-b"
-                    }`}
+                      }`}
                   >
                     {formikRest.errors.priceAvg && formikRest.touched.priceAvg
                       ? formikRest.errors.priceAvg
@@ -774,11 +755,10 @@ const CreateRestaurant = ({ closeModal }) => {
                       onClick={() => toggleDay(day)}
                     />
                     <div
-                      className={`select is-dark select-container day-select ${
-                        weekSchedule[day].habilitado
+                      className={`select is-dark select-container day-select ${weekSchedule[day].habilitado
                           ? ""
                           : "is-disabled disabled"
-                      }`}
+                        }`}
                     >
                       <select
                         className="select-table"
@@ -798,11 +778,10 @@ const CreateRestaurant = ({ closeModal }) => {
                     </div>
                     <br />
                     <div
-                      className={`select is-dark select-container day-select ${
-                        weekSchedule[day].habilitado
+                      className={`select is-dark select-container day-select ${weekSchedule[day].habilitado
                           ? ""
                           : "is-disabled disabled"
-                      }`}
+                        }`}
                     >
                       <select
                         className="select-table"
@@ -833,8 +812,8 @@ const CreateRestaurant = ({ closeModal }) => {
                   className="custom-button"
                   type="submit"
                   onClick={formikRest.handleSubmit}
-                    
-            
+
+
                 >
                   Registrar Restaurante
                 </button>
