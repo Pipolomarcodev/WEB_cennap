@@ -46,7 +46,7 @@ const UserLogin = () => {
 
       try {
         const response = await fetch(
-          "http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/generateToken",
+          `${BaseUrl}/auth/generateToken`,
           {
             method: "POST",
             headers: {
@@ -112,9 +112,8 @@ const UserLogin = () => {
 
           <button
             type="submit"
-            className={`btn-form button ${
-              formik.isSubmitting ? "is-loading" : ""
-            }`}
+            className={`btn-form button ${formik.isSubmitting ? "is-loading" : ""
+              }`}
           >
             Iniciar Sesión
           </button>

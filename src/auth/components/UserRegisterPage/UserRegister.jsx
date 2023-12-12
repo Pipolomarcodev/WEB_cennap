@@ -6,6 +6,7 @@ import { useAuth } from "../../../context/AuthContext";
 import images from "../../../constants/images";
 import "../../../assets/bulma.css";
 import "./registerPage.css";
+import BaseUrl from "../../../constants/BaseUrl";
 
 const UserRegister = () => {
   const { login } = useAuth();
@@ -26,7 +27,7 @@ const UserRegister = () => {
       .test(
         "is-email-available",
         "Este correo electrónico ya está en uso.",
-        async function (value) {
+        async function(value) {
           if (this.parent) {
             // Llamar a la función isEmailAvailable solo al enviar el formulario
             const isAvailable = await isEmailAvailable(value);
@@ -46,7 +47,7 @@ const UserRegister = () => {
   const isEmailAvailable = async (email) => {
     try {
       const response = await fetch(
-        `http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/check-email/${email}`
+        `${BaseUrl}/auth/check-email/${email}`
       );
       if (response.status === 200) {
         return true;
@@ -75,7 +76,7 @@ const UserRegister = () => {
     };
 
     try {
-      const response = await fetch("http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/addNewUser", {
+      const response = await fetch(`${BaseUrl}/auth/addNewUser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +91,8 @@ const UserRegister = () => {
         };
 
         const tokenResponse = await fetch(
-          "http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/generateToken",
+          `${BaseUrl}/auth/generateToken`
+          ,
           {
             method: "POST",
             headers: {
@@ -209,9 +211,8 @@ const UserRegister = () => {
         </div>
         <button
           type="submit"
-          className={`btn-form button ${
-            formik.isSubmitting ? "is-loading" : ""
-          }`}
+          className={`btn-form button ${formik.isSubmitting ? "is-loading" : ""
+            }`}
           onClick={formik.handleSubmit}
         >
           Crear cuenta

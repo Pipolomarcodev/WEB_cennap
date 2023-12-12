@@ -10,6 +10,7 @@ import { useState } from "react";
 import { images } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
+import BaseUrl from "../../../constants/BaseUrl";
 
 export const Reserve = () => {
   const navigate = useNavigate();
@@ -79,7 +80,7 @@ export const Reserve = () => {
       user: userId,
     };
 
-    fetch("http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/reservations/create", {
+    fetch(`${BaseUrl}/v1/api/reservations/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

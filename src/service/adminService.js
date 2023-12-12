@@ -1,6 +1,8 @@
+import BaseUrl from "../constants/BaseUrl";
+
 export const findAll = async () => {
   try {
-    const response = await fetch("http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/restaurants");
+    const response = await fetch(`${BaseUrl}/v1/api/restaurants`);
 
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
@@ -14,7 +16,7 @@ export const findAll = async () => {
 };
 
 export const remove = async (id, token) => {
-  const url = `http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/restaurants/delete/${id}`;
+  const url = `${BaseUrl}/v1/api/restaurants/delete/${id}`;
 
   try {
     const response = await fetch(url, {

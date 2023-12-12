@@ -2,6 +2,7 @@ import "./tablas.css";
 
 import { useState } from "react";
 import { useEffect } from "react";
+import BaseUrl from "../../../constants/BaseUrl";
 
 export const UseItemRegister = () => {
   const [reserves, setReserves] = useState([]);
@@ -11,7 +12,7 @@ export const UseItemRegister = () => {
     const userData = JSON.parse(userDataString);
     const userId = userData.id;
     console.log(userId);
-    fetch(`http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/reservations/user/${userId}`)
+    fetch(`${BaseUrl}/v1/api/reservations/user/${userId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);

@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import BaseUrl from "../constants/BaseUrl";
 
 const AuthContext = createContext();
 
@@ -58,7 +59,7 @@ const AuthProvider = ({ children }) => {
       const fetchUser = async () => {
         try {
           const response = await fetch(
-            `http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/get-user/${storedToken}`,
+            `${BaseUrl}/auth/get-user/${storedToken}`,
             {
               method: "GET",
             }
@@ -106,7 +107,7 @@ const AuthProvider = ({ children }) => {
   const verifyUser = async () => {
     try {
       const response = await fetch(
-        `http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/get-user/${state.token}`,
+        `${BaseUrl}/auth/get-user/${state.token}`,
         {
           method: "GET",
         }

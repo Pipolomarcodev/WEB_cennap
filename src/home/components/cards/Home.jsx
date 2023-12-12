@@ -7,6 +7,7 @@ import { images } from "../../../constants";
 import { Modal } from "../modal/Modal";
 import { useAuth } from "../../../context/AuthContext";
 import { useItemsCart } from "../../../hooks/useItemsCart";
+import BaseUrl from "../../../constants/BaseUrl";
 
 const Home = ({ page }) => {
   const [restaurants, setRestaurants] = useState([]);
@@ -69,7 +70,7 @@ const Home = ({ page }) => {
 
   const fetchRestaurants = () => {
     const backendPage = currentPage - 1;
-    const url = `http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/v1/api/restaurants/pages?page=${backendPage}&size=10&sort=name,asc`;
+    const url = `${BaseUrl}/v1/api/restaurants/pages?page=${backendPage}&size=10&sort=name,asc`;
 
     setLoading(true);
 
@@ -153,9 +154,8 @@ const Home = ({ page }) => {
         >
           <Link
             to={`/home/${currentPage - 1}`}
-            className={`pagination-previous ${
-              currentPage === 1 ? "is-disabled none" : ""
-            }`}
+            className={`pagination-previous ${currentPage === 1 ? "is-disabled none" : ""
+              }`}
             onClick={() => handlePageChange(currentPage - 1)}
           >
             {"<"}
@@ -165,9 +165,8 @@ const Home = ({ page }) => {
               <li key={pageNumber}>
                 <Link
                   to={`/home/${pageNumber + 1}`}
-                  className={`pagination-link ${
-                    currentPage === pageNumber + 1 ? "is-current" : ""
-                  }`}
+                  className={`pagination-link ${currentPage === pageNumber + 1 ? "is-current" : ""
+                    }`}
                   aria-label={`Goto page ${pageNumber + 1}`}
                   onClick={() => handlePageChange(pageNumber + 1)}
                 >
@@ -178,9 +177,8 @@ const Home = ({ page }) => {
           </ul>
           <Link
             to={`/home/${currentPage + 1}`}
-            className={`pagination-next ${
-              currentPage === totalPages ? "is-disabled none" : ""
-            }`}
+            className={`pagination-next ${currentPage === totalPages ? "is-disabled none" : ""
+              }`}
             onClick={() => handlePageChange(currentPage + 1)}
           >
             {">"}

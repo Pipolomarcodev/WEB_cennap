@@ -1,3 +1,5 @@
+import BaseUrl from "../constants/BaseUrl";
+
 export const useItemsCart = () => {
   const handlerAddFav = (id) => {
     const userDataString = localStorage.getItem("user");
@@ -5,7 +7,7 @@ export const useItemsCart = () => {
     const userId = userData.id;
     const restoId = id;
     fetch(
-      `http://ec2-18-224-68-91.us-east-2.compute.amazonaws.com:8080/auth/toggle-fav/${userId}/${restoId}`,
+      `${BaseUrl}/auth/toggle-fav/${userId}/${restoId}`,
       {
         method: "GET",
       }
